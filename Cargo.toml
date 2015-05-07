@@ -1,0 +1,7 @@
+[package]
+name = "wayland-client-rs"
+version = "0.1.0"
+authors = ["lummax <luogpg@googlemail.com>"]
+
+[lib]
+name = "wayland_client"
