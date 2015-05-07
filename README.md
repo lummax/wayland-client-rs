@@ -1,4 +1,4 @@
-wayland-client-rs
+wayland-client-rs [![Build Status](https://travis-ci.org/lummax/wayland-client-rs.svg?branch=master)](https://travis-ci.org/lummax/wayland-client-rs)
 =================
 
 This is an attempt at convenient rust bindings to the wayland-client library.
