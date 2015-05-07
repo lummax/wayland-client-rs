@@ -3,5 +3,8 @@ name = "wayland-client-rs"
 version = "0.1.0"
 authors = ["lummax <luogpg@googlemail.com>"]
 
+[dev-dependencies.tempfile]
+version = "*"
+
 [lib]
 name = "wayland_client"
