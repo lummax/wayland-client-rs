@@ -1,0 +1,7 @@
+language: rust
+rust:
+  - nightly
+
+install:
+    - sudo apt-get update -qq
+    - sudo apt-get -qq install libwayland-client0
