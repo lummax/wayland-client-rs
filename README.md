@@ -21,5 +21,6 @@ Using
 -----
 
 Start up a weston instance and compile one of the examples (e.g. `cargo build
---example simple-shm`). These examples might be a good starting point to dive
-into the code.
+--example simple-shm`). These
+[examples](https://github.com/lummax/wayland-client-rs/tree/master/examples)
+might be a good starting point to dive into the code.
