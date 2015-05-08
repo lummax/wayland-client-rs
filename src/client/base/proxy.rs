@@ -1,6 +1,7 @@
 // Copyright (c) <2015> <lummax>
 // Licensed under MIT (http://opensource.org/licenses/MIT)
 
+use std::ptr;
 use std::ffi::CStr;
 
 use ffi;
@@ -25,10 +26,16 @@ impl Proxy {
         return String::from_utf8(buffer.to_vec()).unwrap();
     }
 
-    pub fn set_queue(&mut self, queue: &mut EventQueue) {
-        return unsafe {
-            ffi::wayland::wl_proxy_set_queue(self.wl_object, queue.as_mut_ptr())
+    pub fn set_queue(&mut self, queue: Option<&mut EventQueue>) {
+        let queue_ptr = match queue {
+            Some(queue_) => queue_.as_mut_ptr(),
+            None => ptr::null_mut(),
         };
+        unsafe {
+            ffi::wayland::wl_proxy_set_queue(self.wl_object
+                                             as *mut ffi::wayland::WLProxy,
+                                             queue_ptr);
+        }
     }
 }
 

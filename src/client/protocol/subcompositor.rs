@@ -142,7 +142,7 @@ impl Subcompositor {
         return self.proxy.get_class();
     }
 
-    pub fn set_queue(&mut self, queue: &mut EventQueue) {
+    pub fn set_queue(&mut self, queue: Option<&mut EventQueue>) {
         self.proxy.set_queue(queue);
     }
 }

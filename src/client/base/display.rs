@@ -57,11 +57,15 @@ impl Display {
         return String::from_utf8(buffer.to_vec()).unwrap();
     }
 
-    pub fn set_queue(&mut self, queue: &mut EventQueue) {
+    pub fn set_queue(&mut self, queue: Option<&mut EventQueue>) {
+        let queue_ptr = match queue {
+            Some(queue_) => queue_.as_mut_ptr(),
+            None => ptr::null_mut(),
+        };
         unsafe {
             ffi::wayland::wl_proxy_set_queue(self.wl_object
                                              as *mut ffi::wayland::WLProxy,
-                                             queue.as_mut_ptr());
+                                             queue_ptr);
         }
     }
 

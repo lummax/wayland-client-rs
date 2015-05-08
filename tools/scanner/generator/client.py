@@ -226,7 +226,7 @@ impl {{name}} {
         return self.display.get_class();
     }
 
-    pub fn set_queue(&mut self, queue: &mut EventQueue) {
+    pub fn set_queue(&mut self, queue: Option<&mut EventQueue>) {
         self.display.set_queue(queue);
     }
 
@@ -295,7 +295,7 @@ impl {{name}} {
         return self.proxy.get_class();
     }
 
-    pub fn set_queue(&mut self, queue: &mut EventQueue) {
+    pub fn set_queue(&mut self, queue: Option<&mut EventQueue>) {
         self.proxy.set_queue(queue);
     }
     {{/is_display}}

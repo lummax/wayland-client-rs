@@ -167,7 +167,7 @@ impl Display {
         return self.display.get_class();
     }
 
-    pub fn set_queue(&mut self, queue: &mut EventQueue) {
+    pub fn set_queue(&mut self, queue: Option<&mut EventQueue>) {
         self.display.set_queue(queue);
     }
 
