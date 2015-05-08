@@ -1,6 +1,7 @@
 // Copyright (c) <2015> <lummax>
 // Licensed under MIT (http://opensource.org/licenses/MIT)
 
+use std::ptr;
 use std::ffi::{CStr, CString};
 use std::os::unix::io::RawFd;
 
@@ -14,10 +15,13 @@ pub struct Display {
 }
 
 impl Display {
-    pub fn connect(name: &str) -> Result<Self, &'static str> {
-        let c_name = CString::new(name).unwrap();
+    pub fn connect(name: Option<&str>) -> Result<Self, &'static str> {
+        let name_ptr = match name {
+            Some(string) => CString::new(string).unwrap().as_ptr(),
+            None => ptr::null(),
+        };
         let display = unsafe {
-            ffi::wayland::wl_display_connect(c_name.as_ptr())
+            ffi::wayland::wl_display_connect(name_ptr)
         };
         if display.is_null() {
             return Err("error on connect");

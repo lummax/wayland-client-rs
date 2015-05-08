@@ -200,7 +200,7 @@ impl {{name}} {
     {{/methods}}
 
     {{#is_display}}
-    pub fn connect(name: &str) -> Result<Self, &'static str> {
+    pub fn connect(name: Option<&str>) -> Result<Self, &'static str> {
         return match BaseDisplay::connect(name) {
             Ok(display) => Ok(Display{
                 display: display,

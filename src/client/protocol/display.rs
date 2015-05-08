@@ -141,7 +141,7 @@ impl Display {
         return ::client::protocol::Registry::from_mut_ptr(object);
     }
 
-    pub fn connect(name: &str) -> Result<Self, &'static str> {
+    pub fn connect(name: Option<&str>) -> Result<Self, &'static str> {
         return match BaseDisplay::connect(name) {
             Ok(display) => Ok(Display{
                 display: display,
