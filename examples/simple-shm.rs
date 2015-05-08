@@ -259,7 +259,7 @@ impl CallbackEventHandler for Window {
 }
 
 fn main() {
-    let mut display = Display::connect("wayland-0").unwrap();
+    let mut display = Display::connect(None).unwrap();
     let mut registry = MyRegistry::new(&mut display);
     registry.connect_dispatcher();
     display.roundtrip();

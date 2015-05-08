@@ -145,10 +145,10 @@ impl OutputEventHandler for MyOutput {
 }
 
 fn main() {
-    let mut display = Display::connect("wayland-0").unwrap();
+    let mut display = Display::connect(None).unwrap();
     let mut registry = MyRegistry::new(display.get_registry().unwrap());
     registry.connect_dispatcher();
-    
+
     while registry.roundtrip {
         registry.roundtrip = false;
         display.roundtrip();
