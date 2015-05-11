@@ -49,7 +49,7 @@ def parse_argument(node):
                     node.get('type', ''),
                     node.get('interface', ''),
                     node.get('summary', ''),
-                    node.get('allow_null', 'false'))
+                    node.get('allow-null', 'false'))
 
 def parse_entry(node):
     return Entry(node.get('name', ''),

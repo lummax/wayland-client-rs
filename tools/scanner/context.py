@@ -101,7 +101,7 @@ def context_argument(node):
                     interface=classify_name(node.interface),
                     wl_interface=node.interface,
                     summary=node.summary,
-                    allow_null=node.allow_null)
+                    allow_null=node.allow_null == 'true')
 
 def context_enum(node, interface):
     return Enum(name=classify_name(interface) + classify_name(node.name),
