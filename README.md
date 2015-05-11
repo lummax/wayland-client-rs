@@ -14,7 +14,6 @@ This might not be usable at the moment. Major `TODO`s are:
 - testing and documentation
 - get `WLArray` to work
 - get `WWLObject` to work
-- respect the `allow-null` field in the protocol specification
 - error handling on wayland-ffi calls
 
 Using
