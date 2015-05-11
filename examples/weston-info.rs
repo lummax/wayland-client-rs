@@ -10,17 +10,17 @@ use wayland_client::client::{FromPrimitive, Display,
                              OutputTransform, OutputMode};
 
 #[derive(Debug)]
-struct MyRegistry {
+struct Info {
     registry: Registry,
-    seat: Option<MySeat>,
-    shm: Option<MyShm>,
-    output: Option<MyOutput>,
+    seat: Option<Seat>,
+    shm: Option<Shm>,
+    output: Option<Output>,
     pub roundtrip: bool,
 }
 
-impl MyRegistry {
-    fn new(registry: Registry) -> MyRegistry {
-        return MyRegistry {
+impl Info {
+    fn new(registry: Registry) -> Info {
+        return Info {
             registry: registry,
             seat: None,
             shm: None,
@@ -30,7 +30,7 @@ impl MyRegistry {
     }
 }
 
-impl RegistryEventHandler for MyRegistry {
+impl RegistryEventHandler for Info {
     fn get_registry(&mut self) -> &mut Registry {
         return &mut self.registry;
     }
@@ -39,19 +39,16 @@ impl RegistryEventHandler for MyRegistry {
         println!("interface: '{}', version: {}, name: {}", interface, version, name);
         if interface == "wl_seat" {
             self.roundtrip = true;
-            let mut seat = MySeat::new(self.registry.bind(name, version).unwrap());
-            seat.connect_dispatcher();
-            self.seat = Some(seat);
+            self.seat = self.registry.bind(name, version).ok();
+            SeatEventHandler::connect_dispatcher(self);
         } else if interface == "wl_shm" {
             self.roundtrip = true;
-            let mut shm = MyShm::new(self.registry.bind(name, version).unwrap());
-            shm.connect_dispatcher();
-            self.shm = Some(shm);
+            self.shm = self.registry.bind(name, version).ok();
+            ShmEventHandler::connect_dispatcher(self);
         } else if interface == "wl_output" {
             self.roundtrip = true;
-            let mut output = MyOutput::new(self.registry.bind(name, version).unwrap());
-            output.connect_dispatcher();
-            self.output = Some(output);
+            self.output = self.registry.bind(name, version).ok();
+            OutputEventHandler::connect_dispatcher(self);
         }
     }
 
@@ -60,20 +57,9 @@ impl RegistryEventHandler for MyRegistry {
     }
 }
 
-#[derive(Debug)]
-struct MySeat {
-    seat: Seat,
-}
-
-impl MySeat {
-    fn new(seat: Seat) -> MySeat {
-        return MySeat { seat: seat };
-    }
-}
-
-impl SeatEventHandler for MySeat {
+impl SeatEventHandler for Info {
     fn get_seat(&mut self) -> &mut Seat {
-        return &mut self.seat;
+        return self.seat.as_mut().unwrap();
     }
 
     fn on_capabilities(&mut self, capabilities: u32) {
@@ -85,20 +71,9 @@ impl SeatEventHandler for MySeat {
     }
 }
 
-#[derive(Debug)]
-struct MyShm {
-    shm: Shm,
-}
-
-impl MyShm {
-    fn new(shm: Shm) -> MyShm {
-        return MyShm { shm: shm };
-    }
-}
-
-impl ShmEventHandler for MyShm {
+impl ShmEventHandler for Info {
     fn get_shm(&mut self) -> &mut Shm {
-        return &mut self.shm;
+        return self.shm.as_mut().unwrap();
     }
 
     fn on_format(&mut self, format: u32) {
@@ -106,20 +81,9 @@ impl ShmEventHandler for MyShm {
     }
 }
 
-#[derive(Debug)]
-struct MyOutput {
-    output: Output,
-}
-
-impl MyOutput {
-    fn new(output: Output) -> MyOutput {
-        return MyOutput { output: output };
-    }
-}
-
-impl OutputEventHandler for MyOutput {
+impl OutputEventHandler for Info {
     fn get_output(&mut self) -> &mut Output {
-        return &mut self.output;
+        return self.output.as_mut().unwrap();
     }
 
     fn on_geometry(&mut self, x: i32, y: i32, physical_width: i32,
@@ -146,11 +110,11 @@ impl OutputEventHandler for MyOutput {
 
 fn main() {
     let mut display = Display::connect(None).unwrap();
-    let mut registry = MyRegistry::new(display.get_registry().unwrap());
-    registry.connect_dispatcher();
+    let mut info = Info::new(display.get_registry().unwrap());
+    RegistryEventHandler::connect_dispatcher(&mut info);
 
-    while registry.roundtrip {
-        registry.roundtrip = false;
+    while info.roundtrip {
+        info.roundtrip = false;
         display.roundtrip();
     }
 }
