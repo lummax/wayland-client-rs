@@ -237,8 +237,8 @@ impl Window {
 
         self.paint_pixels(use_first_buffer, time);
 
-        if use_first_buffer { self.surface.attach(self.first_buffer.get_buffer(), 0, 0); }
-        else { self.surface.attach(self.second_buffer.get_buffer(), 0, 0); }
+        if use_first_buffer { self.surface.attach(Some(self.first_buffer.get_buffer()), 0, 0); }
+        else { self.surface.attach(Some(self.second_buffer.get_buffer()), 0, 0); }
 
         self.surface.damage(20, 20, self.width - 20, self.height - 20);
         self.frame = Some(self.surface.frame().unwrap());
