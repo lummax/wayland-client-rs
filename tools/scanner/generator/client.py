@@ -417,21 +417,28 @@ def generate_method(interface_name, request):
     types = {'int': 'i32', 'fd': 'RawFd',
             'uint': 'u32', 'fixed': 'i32',
              'object': '&mut ::client::protocol::{}',
-            'string': '&str',
-            'array': '*mut ffi::wayland::WLArray'}
+             'string': '&str',
+             'array': '*mut ffi::wayland::WLArray'}
 
     char_arguments = list()
     for argument in request.arguments:
-        arg = '{}: {}'.format(argument.name, types.get(argument.type))
+        if argument.allow_null: arg = '{}: Option<{}>'.format(argument.name, types.get(argument.type))
+        else: arg = '{}: {}'.format(argument.name, types.get(argument.type))
         acc = argument.name
 
         if argument.type == 'object':
             arg = arg.format(argument.interface)
-            translation = 'let {0}pointer = {0}.as_mut_ptr() as *mut ffi::wayland::WLProxy;'
+            if argument.allow_null:
+                translation = 'let {0}pointer = {0}.map(|o| o.as_mut_ptr() as *mut ffi::wayland::WLProxy).unwrap_or(ptr::null_mut());'
+            else:
+                translation = 'let {0}pointer = {0}.as_mut_ptr() as *mut ffi::wayland::WLProxy;'
             translations.append(translation.format(argument.name))
             acc += 'pointer'
         elif argument.type == 'string':
-            translation = 'let {0}pointer = CString::new({0}).unwrap().as_ptr();'
+            if argument.allow_null:
+                translation = 'let {0}pointer = {0}.map(|o| CString::new(o).unwrap().as_ptr()).unwrap_or(ptr::null());'
+            else:
+                translation = 'let {0}pointer = CString::new({0}).unwrap().as_ptr();'
             translations.append(translation.format(argument.name))
             acc += 'pointer'
 
