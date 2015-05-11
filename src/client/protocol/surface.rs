@@ -203,9 +203,9 @@ impl Surface {
     /// 
     /// If wl_surface.attach is sent with a NULL wl_buffer, the
     /// following wl_surface.commit will remove the surface content.
-    pub fn attach(&mut self, buffer: &mut ::client::protocol::Buffer, x: i32, y: i32) {
+    pub fn attach(&mut self, buffer: Option<&mut ::client::protocol::Buffer>, x: i32, y: i32) {
         let proxy = self.as_mut_ptr() as *mut ffi::wayland::WLProxy;
-        let bufferpointer = buffer.as_mut_ptr() as *mut ffi::wayland::WLProxy;
+        let bufferpointer = buffer.map(|o| o.as_mut_ptr() as *mut ffi::wayland::WLProxy).unwrap_or(ptr::null_mut());
         unsafe {
             ffi::wayland::wl_proxy_marshal(
                 proxy, SurfaceRequest::Attach as u32, bufferpointer, x, y
@@ -306,9 +306,9 @@ impl Surface {
     /// opaque region has copy semantics, and the wl_region object can be
     /// destroyed immediately. A NULL wl_region causes the pending opaque
     /// region to be set to empty.
-    pub fn set_opaque_region(&mut self, region: &mut ::client::protocol::Region) {
+    pub fn set_opaque_region(&mut self, region: Option<&mut ::client::protocol::Region>) {
         let proxy = self.as_mut_ptr() as *mut ffi::wayland::WLProxy;
-        let regionpointer = region.as_mut_ptr() as *mut ffi::wayland::WLProxy;
+        let regionpointer = region.map(|o| o.as_mut_ptr() as *mut ffi::wayland::WLProxy).unwrap_or(ptr::null_mut());
         unsafe {
             ffi::wayland::wl_proxy_marshal(
                 proxy, SurfaceRequest::SetOpaqueRegion as u32, regionpointer
@@ -338,9 +338,9 @@ impl Surface {
     /// has copy semantics, and the wl_region object can be destroyed
     /// immediately. A NULL wl_region causes the input region to be set
     /// to infinite.
-    pub fn set_input_region(&mut self, region: &mut ::client::protocol::Region) {
+    pub fn set_input_region(&mut self, region: Option<&mut ::client::protocol::Region>) {
         let proxy = self.as_mut_ptr() as *mut ffi::wayland::WLProxy;
-        let regionpointer = region.as_mut_ptr() as *mut ffi::wayland::WLProxy;
+        let regionpointer = region.map(|o| o.as_mut_ptr() as *mut ffi::wayland::WLProxy).unwrap_or(ptr::null_mut());
         unsafe {
             ffi::wayland::wl_proxy_marshal(
                 proxy, SurfaceRequest::SetInputRegion as u32, regionpointer

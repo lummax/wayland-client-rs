@@ -92,9 +92,9 @@ impl DataOffer {
     /// NULL for not accepted.
     /// 
     /// Used for feedback during drag-and-drop.
-    pub fn accept(&mut self, serial: u32, mime_type: &str) {
+    pub fn accept(&mut self, serial: u32, mime_type: Option<&str>) {
         let proxy = self.as_mut_ptr() as *mut ffi::wayland::WLProxy;
-        let mime_typepointer = CString::new(mime_type).unwrap().as_ptr();
+        let mime_typepointer = mime_type.map(|o| CString::new(o).unwrap().as_ptr()).unwrap_or(ptr::null());
         unsafe {
             ffi::wayland::wl_proxy_marshal(
                 proxy, DataOfferRequest::Accept as u32, serial, mime_typepointer

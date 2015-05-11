@@ -296,9 +296,9 @@ impl ShellSurface {
     /// The compositor must reply to this request with a configure event
     /// with the dimensions for the output on which the surface will
     /// be made fullscreen.
-    pub fn set_fullscreen(&mut self, method: u32, framerate: u32, output: &mut ::client::protocol::Output) {
+    pub fn set_fullscreen(&mut self, method: u32, framerate: u32, output: Option<&mut ::client::protocol::Output>) {
         let proxy = self.as_mut_ptr() as *mut ffi::wayland::WLProxy;
-        let outputpointer = output.as_mut_ptr() as *mut ffi::wayland::WLProxy;
+        let outputpointer = output.map(|o| o.as_mut_ptr() as *mut ffi::wayland::WLProxy).unwrap_or(ptr::null_mut());
         unsafe {
             ffi::wayland::wl_proxy_marshal(
                 proxy, ShellSurfaceRequest::SetFullscreen as u32, method, framerate, outputpointer
@@ -354,9 +354,9 @@ impl ShellSurface {
     /// fullscreen shell surface.
     /// 
     /// The details depend on the compositor implementation.
-    pub fn set_maximized(&mut self, output: &mut ::client::protocol::Output) {
+    pub fn set_maximized(&mut self, output: Option<&mut ::client::protocol::Output>) {
         let proxy = self.as_mut_ptr() as *mut ffi::wayland::WLProxy;
-        let outputpointer = output.as_mut_ptr() as *mut ffi::wayland::WLProxy;
+        let outputpointer = output.map(|o| o.as_mut_ptr() as *mut ffi::wayland::WLProxy).unwrap_or(ptr::null_mut());
         unsafe {
             ffi::wayland::wl_proxy_marshal(
                 proxy, ShellSurfaceRequest::SetMaximized as u32, outputpointer

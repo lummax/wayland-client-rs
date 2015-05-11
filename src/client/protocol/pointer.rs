@@ -183,9 +183,9 @@ impl Pointer {
     /// wl_surface is no longer used as the cursor. When the use as a
     /// cursor ends, the current and pending input regions become
     /// undefined, and the wl_surface is unmapped.
-    pub fn set_cursor(&mut self, serial: u32, surface: &mut ::client::protocol::Surface, hotspot_x: i32, hotspot_y: i32) {
+    pub fn set_cursor(&mut self, serial: u32, surface: Option<&mut ::client::protocol::Surface>, hotspot_x: i32, hotspot_y: i32) {
         let proxy = self.as_mut_ptr() as *mut ffi::wayland::WLProxy;
-        let surfacepointer = surface.as_mut_ptr() as *mut ffi::wayland::WLProxy;
+        let surfacepointer = surface.map(|o| o.as_mut_ptr() as *mut ffi::wayland::WLProxy).unwrap_or(ptr::null_mut());
         unsafe {
             ffi::wayland::wl_proxy_marshal(
                 proxy, PointerRequest::SetCursor as u32, serial, surfacepointer, hotspot_x, hotspot_y

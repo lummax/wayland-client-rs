@@ -141,11 +141,11 @@ impl DataDevice {
     /// wl_surface is no longer used as the icon surface. When the use
     /// as an icon ends, the current and pending input regions become
     /// undefined, and the wl_surface is unmapped.
-    pub fn start_drag(&mut self, source: &mut ::client::protocol::DataSource, origin: &mut ::client::protocol::Surface, icon: &mut ::client::protocol::Surface, serial: u32) {
+    pub fn start_drag(&mut self, source: Option<&mut ::client::protocol::DataSource>, origin: &mut ::client::protocol::Surface, icon: Option<&mut ::client::protocol::Surface>, serial: u32) {
         let proxy = self.as_mut_ptr() as *mut ffi::wayland::WLProxy;
-        let sourcepointer = source.as_mut_ptr() as *mut ffi::wayland::WLProxy;
+        let sourcepointer = source.map(|o| o.as_mut_ptr() as *mut ffi::wayland::WLProxy).unwrap_or(ptr::null_mut());
         let originpointer = origin.as_mut_ptr() as *mut ffi::wayland::WLProxy;
-        let iconpointer = icon.as_mut_ptr() as *mut ffi::wayland::WLProxy;
+        let iconpointer = icon.map(|o| o.as_mut_ptr() as *mut ffi::wayland::WLProxy).unwrap_or(ptr::null_mut());
         unsafe {
             ffi::wayland::wl_proxy_marshal(
                 proxy, DataDeviceRequest::StartDrag as u32, sourcepointer, originpointer, iconpointer, serial
@@ -157,9 +157,9 @@ impl DataDevice {
     /// to the data from the source on behalf of the client.
     /// 
     /// To unset the selection, set the source to NULL.
-    pub fn set_selection(&mut self, source: &mut ::client::protocol::DataSource, serial: u32) {
+    pub fn set_selection(&mut self, source: Option<&mut ::client::protocol::DataSource>, serial: u32) {
         let proxy = self.as_mut_ptr() as *mut ffi::wayland::WLProxy;
-        let sourcepointer = source.as_mut_ptr() as *mut ffi::wayland::WLProxy;
+        let sourcepointer = source.map(|o| o.as_mut_ptr() as *mut ffi::wayland::WLProxy).unwrap_or(ptr::null_mut());
         unsafe {
             ffi::wayland::wl_proxy_marshal(
                 proxy, DataDeviceRequest::SetSelection as u32, sourcepointer, serial
