@@ -64,6 +64,30 @@ impl FromPrimitive for SubsurfaceError {
     }
 }
 
+pub trait SubsurfaceErrorSet {
+    fn has_bad_surface(&self) -> bool;
+    fn has_(&self) -> bool;
+}
+
+impl SubsurfaceErrorSet for u32 {
+    fn is_bad_surface(&self) -> bool {
+        return self & (SubsurfaceError::BADSURFACE as u32) != 0;
+    }
+    fn is_(&self) -> bool {
+        return self & (SubsurfaceError::_Dummy as u32) != 0;
+    }
+}
+
+impl SubsurfaceErrorSet for i32 {
+    fn is_bad_surface(&self) -> bool {
+        return self & (SubsurfaceError::BADSURFACE as i32) != 0;
+    }
+    fn is_(&self) -> bool {
+        return self & (SubsurfaceError::_Dummy as i32) != 0;
+    }
+}
+
+
 
 #[repr(C)]
 enum SubsurfaceRequest {
@@ -92,6 +116,8 @@ impl FromPrimitive for SubsurfaceRequest {
         return Self::from_u32(num as u32);
     }
 }
+
+
 
 /// An additional interface to a wl_surface object, which has been
 /// made a sub-surface. A sub-surface has one parent surface. A

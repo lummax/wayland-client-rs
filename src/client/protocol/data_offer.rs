@@ -61,6 +61,8 @@ impl FromPrimitive for DataOfferEvent {
     }
 }
 
+
+
 #[repr(C)]
 enum DataOfferRequest {
     Accept = 0,
@@ -82,6 +84,8 @@ impl FromPrimitive for DataOfferRequest {
         return Self::from_u32(num as u32);
     }
 }
+
+
 
 /// A wl_data_offer represents a piece of data offered for transfer
 /// by another client (the source client).  It is used by the

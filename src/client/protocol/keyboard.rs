@@ -67,6 +67,30 @@ impl FromPrimitive for KeyboardKeymapFormat {
     }
 }
 
+pub trait KeyboardKeymapFormatSet {
+    fn has_no_keymap(&self) -> bool;
+    fn has_xkb_v1(&self) -> bool;
+}
+
+impl KeyboardKeymapFormatSet for u32 {
+    fn is_no_keymap(&self) -> bool {
+        return self & (KeyboardKeymapFormat::NOKEYMAP as u32) != 0;
+    }
+    fn is_xkb_v1(&self) -> bool {
+        return self & (KeyboardKeymapFormat::XKBV1 as u32) != 0;
+    }
+}
+
+impl KeyboardKeymapFormatSet for i32 {
+    fn is_no_keymap(&self) -> bool {
+        return self & (KeyboardKeymapFormat::NOKEYMAP as i32) != 0;
+    }
+    fn is_xkb_v1(&self) -> bool {
+        return self & (KeyboardKeymapFormat::XKBV1 as i32) != 0;
+    }
+}
+
+
 /// Describes the physical state of a key which provoked the key event.
 #[repr(C)]
 #[derive(Debug)]
@@ -90,6 +114,30 @@ impl FromPrimitive for KeyboardKeyState {
         return Self::from_u32(num as u32);
     }
 }
+
+pub trait KeyboardKeyStateSet {
+    fn has_released(&self) -> bool;
+    fn has_pressed(&self) -> bool;
+}
+
+impl KeyboardKeyStateSet for u32 {
+    fn is_released(&self) -> bool {
+        return self & (KeyboardKeyState::RELEASED as u32) != 0;
+    }
+    fn is_pressed(&self) -> bool {
+        return self & (KeyboardKeyState::PRESSED as u32) != 0;
+    }
+}
+
+impl KeyboardKeyStateSet for i32 {
+    fn is_released(&self) -> bool {
+        return self & (KeyboardKeyState::RELEASED as i32) != 0;
+    }
+    fn is_pressed(&self) -> bool {
+        return self & (KeyboardKeyState::PRESSED as i32) != 0;
+    }
+}
+
 
 #[repr(C)]
 enum KeyboardEvent {
@@ -119,6 +167,8 @@ impl FromPrimitive for KeyboardEvent {
     }
 }
 
+
+
 #[repr(C)]
 enum KeyboardRequest {
     Release = 0,
@@ -137,6 +187,8 @@ impl FromPrimitive for KeyboardRequest {
         return Self::from_u32(num as u32);
     }
 }
+
+
 
 /// The wl_keyboard interface represents one or more keyboards
 /// associated with a seat.

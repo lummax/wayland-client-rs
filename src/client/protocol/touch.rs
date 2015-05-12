@@ -68,6 +68,8 @@ impl FromPrimitive for TouchEvent {
     }
 }
 
+
+
 #[repr(C)]
 enum TouchRequest {
     Release = 0,
@@ -86,6 +88,8 @@ impl FromPrimitive for TouchRequest {
         return Self::from_u32(num as u32);
     }
 }
+
+
 
 /// The wl_touch interface represents a touchscreen
 /// associated with a seat.

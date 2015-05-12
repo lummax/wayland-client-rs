@@ -61,6 +61,8 @@ impl FromPrimitive for BufferEvent {
     }
 }
 
+
+
 #[repr(C)]
 enum BufferRequest {
     Destroy = 0,
@@ -79,6 +81,8 @@ impl FromPrimitive for BufferRequest {
         return Self::from_u32(num as u32);
     }
 }
+
+
 
 /// A buffer provides the content for a wl_surface. Buffers are
 /// created through factory interfaces such as wl_drm, wl_shm or

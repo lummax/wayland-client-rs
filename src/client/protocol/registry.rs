@@ -62,6 +62,8 @@ impl FromPrimitive for RegistryEvent {
     }
 }
 
+
+
 #[repr(C)]
 enum RegistryRequest {
     Bind = 0,
@@ -80,6 +82,8 @@ impl FromPrimitive for RegistryRequest {
         return Self::from_u32(num as u32);
     }
 }
+
+
 
 /// The global registry object.  The server has a number of global
 /// objects that are available to all clients.  These objects

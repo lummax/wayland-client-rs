@@ -70,6 +70,37 @@ impl FromPrimitive for SeatCapability {
     }
 }
 
+pub trait SeatCapabilitySet {
+    fn has_pointer(&self) -> bool;
+    fn has_keyboard(&self) -> bool;
+    fn has_touch(&self) -> bool;
+}
+
+impl SeatCapabilitySet for u32 {
+    fn is_pointer(&self) -> bool {
+        return self & (SeatCapability::POINTER as u32) != 0;
+    }
+    fn is_keyboard(&self) -> bool {
+        return self & (SeatCapability::KEYBOARD as u32) != 0;
+    }
+    fn is_touch(&self) -> bool {
+        return self & (SeatCapability::TOUCH as u32) != 0;
+    }
+}
+
+impl SeatCapabilitySet for i32 {
+    fn is_pointer(&self) -> bool {
+        return self & (SeatCapability::POINTER as i32) != 0;
+    }
+    fn is_keyboard(&self) -> bool {
+        return self & (SeatCapability::KEYBOARD as i32) != 0;
+    }
+    fn is_touch(&self) -> bool {
+        return self & (SeatCapability::TOUCH as i32) != 0;
+    }
+}
+
+
 #[repr(C)]
 enum SeatEvent {
     Capabilities = 0,
@@ -89,6 +120,8 @@ impl FromPrimitive for SeatEvent {
         return Self::from_u32(num as u32);
     }
 }
+
+
 
 #[repr(C)]
 enum SeatRequest {
@@ -111,6 +144,8 @@ impl FromPrimitive for SeatRequest {
         return Self::from_u32(num as u32);
     }
 }
+
+
 
 /// A seat is a group of keyboards, pointer and touch devices. This
 /// object is published as a global during start up, or when such a

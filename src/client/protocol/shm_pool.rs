@@ -65,6 +65,8 @@ impl FromPrimitive for ShmPoolRequest {
     }
 }
 
+
+
 /// The wl_shm_pool object encapsulates a piece of memory shared
 /// between the compositor and client.  Through the wl_shm_pool
 /// object, the client can allocate shared memory wl_buffer objects.

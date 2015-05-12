@@ -64,6 +64,30 @@ impl FromPrimitive for SubcompositorError {
     }
 }
 
+pub trait SubcompositorErrorSet {
+    fn has_bad_surface(&self) -> bool;
+    fn has_(&self) -> bool;
+}
+
+impl SubcompositorErrorSet for u32 {
+    fn is_bad_surface(&self) -> bool {
+        return self & (SubcompositorError::BADSURFACE as u32) != 0;
+    }
+    fn is_(&self) -> bool {
+        return self & (SubcompositorError::_Dummy as u32) != 0;
+    }
+}
+
+impl SubcompositorErrorSet for i32 {
+    fn is_bad_surface(&self) -> bool {
+        return self & (SubcompositorError::BADSURFACE as i32) != 0;
+    }
+    fn is_(&self) -> bool {
+        return self & (SubcompositorError::_Dummy as i32) != 0;
+    }
+}
+
+
 
 #[repr(C)]
 enum SubcompositorRequest {
@@ -84,6 +108,8 @@ impl FromPrimitive for SubcompositorRequest {
         return Self::from_u32(num as u32);
     }
 }
+
+
 
 /// The global interface exposing sub-surface compositing capabilities.
 /// A wl_surface, that has sub-surfaces associated, is called the

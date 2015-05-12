@@ -66,6 +66,30 @@ impl FromPrimitive for SurfaceError {
     }
 }
 
+pub trait SurfaceErrorSet {
+    fn has_invalid_scale(&self) -> bool;
+    fn has_invalid_transform(&self) -> bool;
+}
+
+impl SurfaceErrorSet for u32 {
+    fn is_invalid_scale(&self) -> bool {
+        return self & (SurfaceError::INVALIDSCALE as u32) != 0;
+    }
+    fn is_invalid_transform(&self) -> bool {
+        return self & (SurfaceError::INVALIDTRANSFORM as u32) != 0;
+    }
+}
+
+impl SurfaceErrorSet for i32 {
+    fn is_invalid_scale(&self) -> bool {
+        return self & (SurfaceError::INVALIDSCALE as i32) != 0;
+    }
+    fn is_invalid_transform(&self) -> bool {
+        return self & (SurfaceError::INVALIDTRANSFORM as i32) != 0;
+    }
+}
+
+
 #[repr(C)]
 enum SurfaceEvent {
     Enter = 0,
@@ -85,6 +109,8 @@ impl FromPrimitive for SurfaceEvent {
         return Self::from_u32(num as u32);
     }
 }
+
+
 
 #[repr(C)]
 enum SurfaceRequest {
@@ -119,6 +145,8 @@ impl FromPrimitive for SurfaceRequest {
         return Self::from_u32(num as u32);
     }
 }
+
+
 
 /// A surface is a rectangular area that is displayed on the screen.
 /// It has a location, size and pixel contents.

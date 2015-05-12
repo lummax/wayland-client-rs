@@ -64,6 +64,30 @@ impl FromPrimitive for ShellError {
     }
 }
 
+pub trait ShellErrorSet {
+    fn has_role(&self) -> bool;
+    fn has_(&self) -> bool;
+}
+
+impl ShellErrorSet for u32 {
+    fn is_role(&self) -> bool {
+        return self & (ShellError::ROLE as u32) != 0;
+    }
+    fn is_(&self) -> bool {
+        return self & (ShellError::_Dummy as u32) != 0;
+    }
+}
+
+impl ShellErrorSet for i32 {
+    fn is_role(&self) -> bool {
+        return self & (ShellError::ROLE as i32) != 0;
+    }
+    fn is_(&self) -> bool {
+        return self & (ShellError::_Dummy as i32) != 0;
+    }
+}
+
+
 
 #[repr(C)]
 enum ShellRequest {
@@ -83,6 +107,8 @@ impl FromPrimitive for ShellRequest {
         return Self::from_u32(num as u32);
     }
 }
+
+
 
 /// This interface is implemented by servers that provide
 /// desktop-style user interfaces.

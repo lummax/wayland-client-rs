@@ -73,6 +73,58 @@ impl FromPrimitive for OutputSubpixel {
     }
 }
 
+pub trait OutputSubpixelSet {
+    fn has_unknown(&self) -> bool;
+    fn has_none(&self) -> bool;
+    fn has_horizontal_rgb(&self) -> bool;
+    fn has_horizontal_bgr(&self) -> bool;
+    fn has_vertical_rgb(&self) -> bool;
+    fn has_vertical_bgr(&self) -> bool;
+}
+
+impl OutputSubpixelSet for u32 {
+    fn is_unknown(&self) -> bool {
+        return self & (OutputSubpixel::UNKNOWN as u32) != 0;
+    }
+    fn is_none(&self) -> bool {
+        return self & (OutputSubpixel::NONE as u32) != 0;
+    }
+    fn is_horizontal_rgb(&self) -> bool {
+        return self & (OutputSubpixel::HORIZONTALRGB as u32) != 0;
+    }
+    fn is_horizontal_bgr(&self) -> bool {
+        return self & (OutputSubpixel::HORIZONTALBGR as u32) != 0;
+    }
+    fn is_vertical_rgb(&self) -> bool {
+        return self & (OutputSubpixel::VERTICALRGB as u32) != 0;
+    }
+    fn is_vertical_bgr(&self) -> bool {
+        return self & (OutputSubpixel::VERTICALBGR as u32) != 0;
+    }
+}
+
+impl OutputSubpixelSet for i32 {
+    fn is_unknown(&self) -> bool {
+        return self & (OutputSubpixel::UNKNOWN as i32) != 0;
+    }
+    fn is_none(&self) -> bool {
+        return self & (OutputSubpixel::NONE as i32) != 0;
+    }
+    fn is_horizontal_rgb(&self) -> bool {
+        return self & (OutputSubpixel::HORIZONTALRGB as i32) != 0;
+    }
+    fn is_horizontal_bgr(&self) -> bool {
+        return self & (OutputSubpixel::HORIZONTALBGR as i32) != 0;
+    }
+    fn is_vertical_rgb(&self) -> bool {
+        return self & (OutputSubpixel::VERTICALRGB as i32) != 0;
+    }
+    fn is_vertical_bgr(&self) -> bool {
+        return self & (OutputSubpixel::VERTICALBGR as i32) != 0;
+    }
+}
+
+
 /// This describes the transform that a compositor will apply to a
 /// surface to compensate for the rotation or mirroring of an
 /// output device.
@@ -117,6 +169,72 @@ impl FromPrimitive for OutputTransform {
     }
 }
 
+pub trait OutputTransformSet {
+    fn has_normal(&self) -> bool;
+    fn has_90(&self) -> bool;
+    fn has_180(&self) -> bool;
+    fn has_270(&self) -> bool;
+    fn has_flipped(&self) -> bool;
+    fn has_flipped_90(&self) -> bool;
+    fn has_flipped_180(&self) -> bool;
+    fn has_flipped_270(&self) -> bool;
+}
+
+impl OutputTransformSet for u32 {
+    fn is_normal(&self) -> bool {
+        return self & (OutputTransform::NORMAL as u32) != 0;
+    }
+    fn is_90(&self) -> bool {
+        return self & (OutputTransform::_90 as u32) != 0;
+    }
+    fn is_180(&self) -> bool {
+        return self & (OutputTransform::_180 as u32) != 0;
+    }
+    fn is_270(&self) -> bool {
+        return self & (OutputTransform::_270 as u32) != 0;
+    }
+    fn is_flipped(&self) -> bool {
+        return self & (OutputTransform::FLIPPED as u32) != 0;
+    }
+    fn is_flipped_90(&self) -> bool {
+        return self & (OutputTransform::FLIPPED90 as u32) != 0;
+    }
+    fn is_flipped_180(&self) -> bool {
+        return self & (OutputTransform::FLIPPED180 as u32) != 0;
+    }
+    fn is_flipped_270(&self) -> bool {
+        return self & (OutputTransform::FLIPPED270 as u32) != 0;
+    }
+}
+
+impl OutputTransformSet for i32 {
+    fn is_normal(&self) -> bool {
+        return self & (OutputTransform::NORMAL as i32) != 0;
+    }
+    fn is_90(&self) -> bool {
+        return self & (OutputTransform::_90 as i32) != 0;
+    }
+    fn is_180(&self) -> bool {
+        return self & (OutputTransform::_180 as i32) != 0;
+    }
+    fn is_270(&self) -> bool {
+        return self & (OutputTransform::_270 as i32) != 0;
+    }
+    fn is_flipped(&self) -> bool {
+        return self & (OutputTransform::FLIPPED as i32) != 0;
+    }
+    fn is_flipped_90(&self) -> bool {
+        return self & (OutputTransform::FLIPPED90 as i32) != 0;
+    }
+    fn is_flipped_180(&self) -> bool {
+        return self & (OutputTransform::FLIPPED180 as i32) != 0;
+    }
+    fn is_flipped_270(&self) -> bool {
+        return self & (OutputTransform::FLIPPED270 as i32) != 0;
+    }
+}
+
+
 /// These flags describe properties of an output mode.
 /// They are used in the flags bitfield of the mode event.
 #[repr(C)]
@@ -142,6 +260,30 @@ impl FromPrimitive for OutputMode {
     }
 }
 
+pub trait OutputModeSet {
+    fn has_current(&self) -> bool;
+    fn has_preferred(&self) -> bool;
+}
+
+impl OutputModeSet for u32 {
+    fn is_current(&self) -> bool {
+        return self & (OutputMode::CURRENT as u32) != 0;
+    }
+    fn is_preferred(&self) -> bool {
+        return self & (OutputMode::PREFERRED as u32) != 0;
+    }
+}
+
+impl OutputModeSet for i32 {
+    fn is_current(&self) -> bool {
+        return self & (OutputMode::CURRENT as i32) != 0;
+    }
+    fn is_preferred(&self) -> bool {
+        return self & (OutputMode::PREFERRED as i32) != 0;
+    }
+}
+
+
 #[repr(C)]
 enum OutputEvent {
     Geometry = 0,
@@ -165,6 +307,8 @@ impl FromPrimitive for OutputEvent {
         return Self::from_u32(num as u32);
     }
 }
+
+
 
 
 /// An output describes part of the compositor geometry.  The

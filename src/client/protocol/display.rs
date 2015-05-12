@@ -70,6 +70,37 @@ impl FromPrimitive for DisplayError {
     }
 }
 
+pub trait DisplayErrorSet {
+    fn has_invalid_object(&self) -> bool;
+    fn has_invalid_method(&self) -> bool;
+    fn has_no_memory(&self) -> bool;
+}
+
+impl DisplayErrorSet for u32 {
+    fn is_invalid_object(&self) -> bool {
+        return self & (DisplayError::INVALIDOBJECT as u32) != 0;
+    }
+    fn is_invalid_method(&self) -> bool {
+        return self & (DisplayError::INVALIDMETHOD as u32) != 0;
+    }
+    fn is_no_memory(&self) -> bool {
+        return self & (DisplayError::NOMEMORY as u32) != 0;
+    }
+}
+
+impl DisplayErrorSet for i32 {
+    fn is_invalid_object(&self) -> bool {
+        return self & (DisplayError::INVALIDOBJECT as i32) != 0;
+    }
+    fn is_invalid_method(&self) -> bool {
+        return self & (DisplayError::INVALIDMETHOD as i32) != 0;
+    }
+    fn is_no_memory(&self) -> bool {
+        return self & (DisplayError::NOMEMORY as i32) != 0;
+    }
+}
+
+
 #[repr(C)]
 enum DisplayEvent {
     Error = 0,
@@ -90,6 +121,8 @@ impl FromPrimitive for DisplayEvent {
     }
 }
 
+
+
 #[repr(C)]
 enum DisplayRequest {
     Sync = 0,
@@ -109,6 +142,8 @@ impl FromPrimitive for DisplayRequest {
         return Self::from_u32(num as u32);
     }
 }
+
+
 
 /// The core global object.  This is a special singleton object.  It
 /// is used for internal Wayland protocol features.

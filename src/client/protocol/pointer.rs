@@ -64,6 +64,30 @@ impl FromPrimitive for PointerError {
     }
 }
 
+pub trait PointerErrorSet {
+    fn has_role(&self) -> bool;
+    fn has_(&self) -> bool;
+}
+
+impl PointerErrorSet for u32 {
+    fn is_role(&self) -> bool {
+        return self & (PointerError::ROLE as u32) != 0;
+    }
+    fn is_(&self) -> bool {
+        return self & (PointerError::_Dummy as u32) != 0;
+    }
+}
+
+impl PointerErrorSet for i32 {
+    fn is_role(&self) -> bool {
+        return self & (PointerError::ROLE as i32) != 0;
+    }
+    fn is_(&self) -> bool {
+        return self & (PointerError::_Dummy as i32) != 0;
+    }
+}
+
+
 /// Describes the physical state of a button which provoked the button
 /// event.
 #[repr(C)]
@@ -89,6 +113,30 @@ impl FromPrimitive for PointerButtonState {
     }
 }
 
+pub trait PointerButtonStateSet {
+    fn has_released(&self) -> bool;
+    fn has_pressed(&self) -> bool;
+}
+
+impl PointerButtonStateSet for u32 {
+    fn is_released(&self) -> bool {
+        return self & (PointerButtonState::RELEASED as u32) != 0;
+    }
+    fn is_pressed(&self) -> bool {
+        return self & (PointerButtonState::PRESSED as u32) != 0;
+    }
+}
+
+impl PointerButtonStateSet for i32 {
+    fn is_released(&self) -> bool {
+        return self & (PointerButtonState::RELEASED as i32) != 0;
+    }
+    fn is_pressed(&self) -> bool {
+        return self & (PointerButtonState::PRESSED as i32) != 0;
+    }
+}
+
+
 /// Describes the axis types of scroll events.
 #[repr(C)]
 #[derive(Debug)]
@@ -110,6 +158,30 @@ impl FromPrimitive for PointerAxis {
         return Self::from_u32(num as u32);
     }
 }
+
+pub trait PointerAxisSet {
+    fn has_vertical_scroll(&self) -> bool;
+    fn has_horizontal_scroll(&self) -> bool;
+}
+
+impl PointerAxisSet for u32 {
+    fn is_vertical_scroll(&self) -> bool {
+        return self & (PointerAxis::VERTICALSCROLL as u32) != 0;
+    }
+    fn is_horizontal_scroll(&self) -> bool {
+        return self & (PointerAxis::HORIZONTALSCROLL as u32) != 0;
+    }
+}
+
+impl PointerAxisSet for i32 {
+    fn is_vertical_scroll(&self) -> bool {
+        return self & (PointerAxis::VERTICALSCROLL as i32) != 0;
+    }
+    fn is_horizontal_scroll(&self) -> bool {
+        return self & (PointerAxis::HORIZONTALSCROLL as i32) != 0;
+    }
+}
+
 
 #[repr(C)]
 enum PointerEvent {
@@ -137,6 +209,8 @@ impl FromPrimitive for PointerEvent {
     }
 }
 
+
+
 #[repr(C)]
 enum PointerRequest {
     SetCursor = 0,
@@ -156,6 +230,8 @@ impl FromPrimitive for PointerRequest {
         return Self::from_u32(num as u32);
     }
 }
+
+
 
 /// The wl_pointer interface represents one or more input devices,
 /// such as mice, which control the pointer location and pointer_focus

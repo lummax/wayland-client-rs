@@ -64,6 +64,30 @@ impl FromPrimitive for DataDeviceError {
     }
 }
 
+pub trait DataDeviceErrorSet {
+    fn has_role(&self) -> bool;
+    fn has_(&self) -> bool;
+}
+
+impl DataDeviceErrorSet for u32 {
+    fn is_role(&self) -> bool {
+        return self & (DataDeviceError::ROLE as u32) != 0;
+    }
+    fn is_(&self) -> bool {
+        return self & (DataDeviceError::_Dummy as u32) != 0;
+    }
+}
+
+impl DataDeviceErrorSet for i32 {
+    fn is_role(&self) -> bool {
+        return self & (DataDeviceError::ROLE as i32) != 0;
+    }
+    fn is_(&self) -> bool {
+        return self & (DataDeviceError::_Dummy as i32) != 0;
+    }
+}
+
+
 #[repr(C)]
 enum DataDeviceEvent {
     DataOffer = 0,
@@ -92,6 +116,8 @@ impl FromPrimitive for DataDeviceEvent {
     }
 }
 
+
+
 #[repr(C)]
 enum DataDeviceRequest {
     StartDrag = 0,
@@ -113,6 +139,8 @@ impl FromPrimitive for DataDeviceRequest {
         return Self::from_u32(num as u32);
     }
 }
+
+
 
 /// There is one wl_data_device per seat which can be obtained
 /// from the global wl_data_device_manager singleton.
