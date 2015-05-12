@@ -164,7 +164,7 @@ pub trait {{name}}Set {
 
 impl {{name}}Set for u32 {
     {{#entries}}
-    fn is_{{wl_name}}(&self) -> bool {
+    fn has_{{wl_name}}(&self) -> bool {
         return self & ({{name}}::{{entry_name}} as u32) != 0;
     }
     {{/entries}}
@@ -172,7 +172,7 @@ impl {{name}}Set for u32 {
 
 impl {{name}}Set for i32 {
     {{#entries}}
-    fn is_{{wl_name}}(&self) -> bool {
+    fn has_{{wl_name}}(&self) -> bool {
         return self & ({{name}}::{{entry_name}} as i32) != 0;
     }
     {{/entries}}
