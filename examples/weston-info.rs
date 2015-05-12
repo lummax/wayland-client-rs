@@ -77,7 +77,10 @@ impl RegistryEventHandler for Info {
     }
 
     fn on_global(&mut self, name: u32, interface: String, version: u32) {
-        println!("interface: '{}', version: {}, name: {}", interface, version, name);
+        self.data.insert(interface.clone(),
+                         format!("interface: '{}', version: {}, name: {}",
+                                 interface, version, name));
+
         if interface == "wl_seat" {
             self.roundtrip = true;
             self.seat = self.registry.bind(name, version).ok();
@@ -91,10 +94,6 @@ impl RegistryEventHandler for Info {
             self.output = self.registry.bind(name, version).ok();
             OutputEventHandler::connect_dispatcher(self);
         }
-    }
-
-    fn on_global_remove(&mut self, name: u32) {
-        println!("on_global_remove({})", name);
     }
 }
 
