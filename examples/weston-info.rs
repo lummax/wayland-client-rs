@@ -103,11 +103,19 @@ impl SeatEventHandler for Info {
     }
 
     fn on_capabilities(&mut self, capabilities: u32) {
-        println!("on_capabilities({})", capabilities);
+        if capabilities & (SeatCapability::Pointer as u32) != 0 {
+            self.seat_data.capabilities.push("pointer".to_string());
+        }
+        if capabilities & (SeatCapability::Keyboard as u32) != 0 {
+            self.seat_data.capabilities.push("keyboard".to_string());
+        }
+        if capabilities & (SeatCapability::Touch as u32) != 0 {
+            self.seat_data.capabilities.push("touch".to_string());
+        }
     }
 
     fn on_name(&mut self, name: String) {
-        println!("on_name({})", name);
+        self.seat_data.name = name;
     }
 }
 
