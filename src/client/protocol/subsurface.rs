@@ -46,7 +46,7 @@ extern {
 #[derive(Debug)]
 pub enum SubsurfaceError {
     /// wl_surface is not a sibling or the parent
-    BADSURFACE = 0,
+    BadSurface = 0,
     
     _Dummy,
 }
@@ -54,7 +54,7 @@ pub enum SubsurfaceError {
 impl FromPrimitive for SubsurfaceError {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(SubsurfaceError::BADSURFACE),
+            0 => Some(SubsurfaceError::BadSurface),
             _ => None
         }
     }
@@ -71,7 +71,7 @@ pub trait SubsurfaceErrorSet {
 
 impl SubsurfaceErrorSet for u32 {
     fn is_bad_surface(&self) -> bool {
-        return self & (SubsurfaceError::BADSURFACE as u32) != 0;
+        return self & (SubsurfaceError::BadSurface as u32) != 0;
     }
     fn is_(&self) -> bool {
         return self & (SubsurfaceError::_Dummy as u32) != 0;
@@ -80,7 +80,7 @@ impl SubsurfaceErrorSet for u32 {
 
 impl SubsurfaceErrorSet for i32 {
     fn is_bad_surface(&self) -> bool {
-        return self & (SubsurfaceError::BADSURFACE as i32) != 0;
+        return self & (SubsurfaceError::BadSurface as i32) != 0;
     }
     fn is_(&self) -> bool {
         return self & (SubsurfaceError::_Dummy as i32) != 0;

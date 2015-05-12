@@ -48,19 +48,19 @@ extern {
 #[derive(Debug)]
 pub enum SeatCapability {
     /// The seat has pointer devices
-    POINTER = 1,
+    Pointer = 1,
     /// The seat has one or more keyboards
-    KEYBOARD = 2,
+    Keyboard = 2,
     /// The seat has touch devices
-    TOUCH = 4,
+    Touch = 4,
 }
 
 impl FromPrimitive for SeatCapability {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            1 => Some(SeatCapability::POINTER),
-            2 => Some(SeatCapability::KEYBOARD),
-            4 => Some(SeatCapability::TOUCH),
+            1 => Some(SeatCapability::Pointer),
+            2 => Some(SeatCapability::Keyboard),
+            4 => Some(SeatCapability::Touch),
             _ => None
         }
     }
@@ -78,25 +78,25 @@ pub trait SeatCapabilitySet {
 
 impl SeatCapabilitySet for u32 {
     fn is_pointer(&self) -> bool {
-        return self & (SeatCapability::POINTER as u32) != 0;
+        return self & (SeatCapability::Pointer as u32) != 0;
     }
     fn is_keyboard(&self) -> bool {
-        return self & (SeatCapability::KEYBOARD as u32) != 0;
+        return self & (SeatCapability::Keyboard as u32) != 0;
     }
     fn is_touch(&self) -> bool {
-        return self & (SeatCapability::TOUCH as u32) != 0;
+        return self & (SeatCapability::Touch as u32) != 0;
     }
 }
 
 impl SeatCapabilitySet for i32 {
     fn is_pointer(&self) -> bool {
-        return self & (SeatCapability::POINTER as i32) != 0;
+        return self & (SeatCapability::Pointer as i32) != 0;
     }
     fn is_keyboard(&self) -> bool {
-        return self & (SeatCapability::KEYBOARD as i32) != 0;
+        return self & (SeatCapability::Keyboard as i32) != 0;
     }
     fn is_touch(&self) -> bool {
-        return self & (SeatCapability::TOUCH as i32) != 0;
+        return self & (SeatCapability::Touch as i32) != 0;
     }
 }
 

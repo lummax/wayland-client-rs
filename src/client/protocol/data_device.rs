@@ -46,7 +46,7 @@ extern {
 #[derive(Debug)]
 pub enum DataDeviceError {
     /// given wl_surface has another role
-    ROLE = 0,
+    Role = 0,
     
     _Dummy,
 }
@@ -54,7 +54,7 @@ pub enum DataDeviceError {
 impl FromPrimitive for DataDeviceError {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(DataDeviceError::ROLE),
+            0 => Some(DataDeviceError::Role),
             _ => None
         }
     }
@@ -71,7 +71,7 @@ pub trait DataDeviceErrorSet {
 
 impl DataDeviceErrorSet for u32 {
     fn is_role(&self) -> bool {
-        return self & (DataDeviceError::ROLE as u32) != 0;
+        return self & (DataDeviceError::Role as u32) != 0;
     }
     fn is_(&self) -> bool {
         return self & (DataDeviceError::_Dummy as u32) != 0;
@@ -80,7 +80,7 @@ impl DataDeviceErrorSet for u32 {
 
 impl DataDeviceErrorSet for i32 {
     fn is_role(&self) -> bool {
-        return self & (DataDeviceError::ROLE as i32) != 0;
+        return self & (DataDeviceError::Role as i32) != 0;
     }
     fn is_(&self) -> bool {
         return self & (DataDeviceError::_Dummy as i32) != 0;

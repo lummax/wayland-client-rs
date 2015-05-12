@@ -48,19 +48,19 @@ extern {
 #[derive(Debug)]
 pub enum DisplayError {
     /// server couldn't find object
-    INVALIDOBJECT = 0,
+    InvalidObject = 0,
     /// method doesn't exist on the specified interface
-    INVALIDMETHOD = 1,
+    InvalidMethod = 1,
     /// server is out of memory
-    NOMEMORY = 2,
+    NoMemory = 2,
 }
 
 impl FromPrimitive for DisplayError {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(DisplayError::INVALIDOBJECT),
-            1 => Some(DisplayError::INVALIDMETHOD),
-            2 => Some(DisplayError::NOMEMORY),
+            0 => Some(DisplayError::InvalidObject),
+            1 => Some(DisplayError::InvalidMethod),
+            2 => Some(DisplayError::NoMemory),
             _ => None
         }
     }
@@ -78,25 +78,25 @@ pub trait DisplayErrorSet {
 
 impl DisplayErrorSet for u32 {
     fn is_invalid_object(&self) -> bool {
-        return self & (DisplayError::INVALIDOBJECT as u32) != 0;
+        return self & (DisplayError::InvalidObject as u32) != 0;
     }
     fn is_invalid_method(&self) -> bool {
-        return self & (DisplayError::INVALIDMETHOD as u32) != 0;
+        return self & (DisplayError::InvalidMethod as u32) != 0;
     }
     fn is_no_memory(&self) -> bool {
-        return self & (DisplayError::NOMEMORY as u32) != 0;
+        return self & (DisplayError::NoMemory as u32) != 0;
     }
 }
 
 impl DisplayErrorSet for i32 {
     fn is_invalid_object(&self) -> bool {
-        return self & (DisplayError::INVALIDOBJECT as i32) != 0;
+        return self & (DisplayError::InvalidObject as i32) != 0;
     }
     fn is_invalid_method(&self) -> bool {
-        return self & (DisplayError::INVALIDMETHOD as i32) != 0;
+        return self & (DisplayError::InvalidMethod as i32) != 0;
     }
     fn is_no_memory(&self) -> bool {
-        return self & (DisplayError::NOMEMORY as i32) != 0;
+        return self & (DisplayError::NoMemory as i32) != 0;
     }
 }
 

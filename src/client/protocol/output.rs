@@ -47,23 +47,23 @@ extern {
 #[repr(C)]
 #[derive(Debug)]
 pub enum OutputSubpixel {
-    UNKNOWN = 0,
-    NONE = 1,
-    HORIZONTALRGB = 2,
-    HORIZONTALBGR = 3,
-    VERTICALRGB = 4,
-    VERTICALBGR = 5,
+    Unknown = 0,
+    None = 1,
+    HorizontalRgb = 2,
+    HorizontalBgr = 3,
+    VerticalRgb = 4,
+    VerticalBgr = 5,
 }
 
 impl FromPrimitive for OutputSubpixel {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(OutputSubpixel::UNKNOWN),
-            1 => Some(OutputSubpixel::NONE),
-            2 => Some(OutputSubpixel::HORIZONTALRGB),
-            3 => Some(OutputSubpixel::HORIZONTALBGR),
-            4 => Some(OutputSubpixel::VERTICALRGB),
-            5 => Some(OutputSubpixel::VERTICALBGR),
+            0 => Some(OutputSubpixel::Unknown),
+            1 => Some(OutputSubpixel::None),
+            2 => Some(OutputSubpixel::HorizontalRgb),
+            3 => Some(OutputSubpixel::HorizontalBgr),
+            4 => Some(OutputSubpixel::VerticalRgb),
+            5 => Some(OutputSubpixel::VerticalBgr),
             _ => None
         }
     }
@@ -84,43 +84,43 @@ pub trait OutputSubpixelSet {
 
 impl OutputSubpixelSet for u32 {
     fn is_unknown(&self) -> bool {
-        return self & (OutputSubpixel::UNKNOWN as u32) != 0;
+        return self & (OutputSubpixel::Unknown as u32) != 0;
     }
     fn is_none(&self) -> bool {
-        return self & (OutputSubpixel::NONE as u32) != 0;
+        return self & (OutputSubpixel::None as u32) != 0;
     }
     fn is_horizontal_rgb(&self) -> bool {
-        return self & (OutputSubpixel::HORIZONTALRGB as u32) != 0;
+        return self & (OutputSubpixel::HorizontalRgb as u32) != 0;
     }
     fn is_horizontal_bgr(&self) -> bool {
-        return self & (OutputSubpixel::HORIZONTALBGR as u32) != 0;
+        return self & (OutputSubpixel::HorizontalBgr as u32) != 0;
     }
     fn is_vertical_rgb(&self) -> bool {
-        return self & (OutputSubpixel::VERTICALRGB as u32) != 0;
+        return self & (OutputSubpixel::VerticalRgb as u32) != 0;
     }
     fn is_vertical_bgr(&self) -> bool {
-        return self & (OutputSubpixel::VERTICALBGR as u32) != 0;
+        return self & (OutputSubpixel::VerticalBgr as u32) != 0;
     }
 }
 
 impl OutputSubpixelSet for i32 {
     fn is_unknown(&self) -> bool {
-        return self & (OutputSubpixel::UNKNOWN as i32) != 0;
+        return self & (OutputSubpixel::Unknown as i32) != 0;
     }
     fn is_none(&self) -> bool {
-        return self & (OutputSubpixel::NONE as i32) != 0;
+        return self & (OutputSubpixel::None as i32) != 0;
     }
     fn is_horizontal_rgb(&self) -> bool {
-        return self & (OutputSubpixel::HORIZONTALRGB as i32) != 0;
+        return self & (OutputSubpixel::HorizontalRgb as i32) != 0;
     }
     fn is_horizontal_bgr(&self) -> bool {
-        return self & (OutputSubpixel::HORIZONTALBGR as i32) != 0;
+        return self & (OutputSubpixel::HorizontalBgr as i32) != 0;
     }
     fn is_vertical_rgb(&self) -> bool {
-        return self & (OutputSubpixel::VERTICALRGB as i32) != 0;
+        return self & (OutputSubpixel::VerticalRgb as i32) != 0;
     }
     fn is_vertical_bgr(&self) -> bool {
-        return self & (OutputSubpixel::VERTICALBGR as i32) != 0;
+        return self & (OutputSubpixel::VerticalBgr as i32) != 0;
     }
 }
 
@@ -139,27 +139,27 @@ impl OutputSubpixelSet for i32 {
 #[repr(C)]
 #[derive(Debug)]
 pub enum OutputTransform {
-    NORMAL = 0,
+    Normal = 0,
     _90 = 1,
     _180 = 2,
     _270 = 3,
-    FLIPPED = 4,
-    FLIPPED90 = 5,
-    FLIPPED180 = 6,
-    FLIPPED270 = 7,
+    Flipped = 4,
+    Flipped90 = 5,
+    Flipped180 = 6,
+    Flipped270 = 7,
 }
 
 impl FromPrimitive for OutputTransform {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(OutputTransform::NORMAL),
+            0 => Some(OutputTransform::Normal),
             1 => Some(OutputTransform::_90),
             2 => Some(OutputTransform::_180),
             3 => Some(OutputTransform::_270),
-            4 => Some(OutputTransform::FLIPPED),
-            5 => Some(OutputTransform::FLIPPED90),
-            6 => Some(OutputTransform::FLIPPED180),
-            7 => Some(OutputTransform::FLIPPED270),
+            4 => Some(OutputTransform::Flipped),
+            5 => Some(OutputTransform::Flipped90),
+            6 => Some(OutputTransform::Flipped180),
+            7 => Some(OutputTransform::Flipped270),
             _ => None
         }
     }
@@ -182,7 +182,7 @@ pub trait OutputTransformSet {
 
 impl OutputTransformSet for u32 {
     fn is_normal(&self) -> bool {
-        return self & (OutputTransform::NORMAL as u32) != 0;
+        return self & (OutputTransform::Normal as u32) != 0;
     }
     fn is_90(&self) -> bool {
         return self & (OutputTransform::_90 as u32) != 0;
@@ -194,22 +194,22 @@ impl OutputTransformSet for u32 {
         return self & (OutputTransform::_270 as u32) != 0;
     }
     fn is_flipped(&self) -> bool {
-        return self & (OutputTransform::FLIPPED as u32) != 0;
+        return self & (OutputTransform::Flipped as u32) != 0;
     }
     fn is_flipped_90(&self) -> bool {
-        return self & (OutputTransform::FLIPPED90 as u32) != 0;
+        return self & (OutputTransform::Flipped90 as u32) != 0;
     }
     fn is_flipped_180(&self) -> bool {
-        return self & (OutputTransform::FLIPPED180 as u32) != 0;
+        return self & (OutputTransform::Flipped180 as u32) != 0;
     }
     fn is_flipped_270(&self) -> bool {
-        return self & (OutputTransform::FLIPPED270 as u32) != 0;
+        return self & (OutputTransform::Flipped270 as u32) != 0;
     }
 }
 
 impl OutputTransformSet for i32 {
     fn is_normal(&self) -> bool {
-        return self & (OutputTransform::NORMAL as i32) != 0;
+        return self & (OutputTransform::Normal as i32) != 0;
     }
     fn is_90(&self) -> bool {
         return self & (OutputTransform::_90 as i32) != 0;
@@ -221,16 +221,16 @@ impl OutputTransformSet for i32 {
         return self & (OutputTransform::_270 as i32) != 0;
     }
     fn is_flipped(&self) -> bool {
-        return self & (OutputTransform::FLIPPED as i32) != 0;
+        return self & (OutputTransform::Flipped as i32) != 0;
     }
     fn is_flipped_90(&self) -> bool {
-        return self & (OutputTransform::FLIPPED90 as i32) != 0;
+        return self & (OutputTransform::Flipped90 as i32) != 0;
     }
     fn is_flipped_180(&self) -> bool {
-        return self & (OutputTransform::FLIPPED180 as i32) != 0;
+        return self & (OutputTransform::Flipped180 as i32) != 0;
     }
     fn is_flipped_270(&self) -> bool {
-        return self & (OutputTransform::FLIPPED270 as i32) != 0;
+        return self & (OutputTransform::Flipped270 as i32) != 0;
     }
 }
 
@@ -241,16 +241,16 @@ impl OutputTransformSet for i32 {
 #[derive(Debug)]
 pub enum OutputMode {
     /// indicates this is the current mode
-    CURRENT = 0x1,
+    Current = 0x1,
     /// indicates this is the preferred mode
-    PREFERRED = 0x2,
+    Preferred = 0x2,
 }
 
 impl FromPrimitive for OutputMode {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0x1 => Some(OutputMode::CURRENT),
-            0x2 => Some(OutputMode::PREFERRED),
+            0x1 => Some(OutputMode::Current),
+            0x2 => Some(OutputMode::Preferred),
             _ => None
         }
     }
@@ -267,19 +267,19 @@ pub trait OutputModeSet {
 
 impl OutputModeSet for u32 {
     fn is_current(&self) -> bool {
-        return self & (OutputMode::CURRENT as u32) != 0;
+        return self & (OutputMode::Current as u32) != 0;
     }
     fn is_preferred(&self) -> bool {
-        return self & (OutputMode::PREFERRED as u32) != 0;
+        return self & (OutputMode::Preferred as u32) != 0;
     }
 }
 
 impl OutputModeSet for i32 {
     fn is_current(&self) -> bool {
-        return self & (OutputMode::CURRENT as i32) != 0;
+        return self & (OutputMode::Current as i32) != 0;
     }
     fn is_preferred(&self) -> bool {
-        return self & (OutputMode::PREFERRED as i32) != 0;
+        return self & (OutputMode::Preferred as i32) != 0;
     }
 }
 

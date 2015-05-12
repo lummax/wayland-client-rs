@@ -46,7 +46,7 @@ extern {
 #[derive(Debug)]
 pub enum PointerError {
     /// given wl_surface has another role
-    ROLE = 0,
+    Role = 0,
     
     _Dummy,
 }
@@ -54,7 +54,7 @@ pub enum PointerError {
 impl FromPrimitive for PointerError {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(PointerError::ROLE),
+            0 => Some(PointerError::Role),
             _ => None
         }
     }
@@ -71,7 +71,7 @@ pub trait PointerErrorSet {
 
 impl PointerErrorSet for u32 {
     fn is_role(&self) -> bool {
-        return self & (PointerError::ROLE as u32) != 0;
+        return self & (PointerError::Role as u32) != 0;
     }
     fn is_(&self) -> bool {
         return self & (PointerError::_Dummy as u32) != 0;
@@ -80,7 +80,7 @@ impl PointerErrorSet for u32 {
 
 impl PointerErrorSet for i32 {
     fn is_role(&self) -> bool {
-        return self & (PointerError::ROLE as i32) != 0;
+        return self & (PointerError::Role as i32) != 0;
     }
     fn is_(&self) -> bool {
         return self & (PointerError::_Dummy as i32) != 0;
@@ -94,16 +94,16 @@ impl PointerErrorSet for i32 {
 #[derive(Debug)]
 pub enum PointerButtonState {
     /// The button is not pressed
-    RELEASED = 0,
+    Released = 0,
     /// The button is pressed
-    PRESSED = 1,
+    Pressed = 1,
 }
 
 impl FromPrimitive for PointerButtonState {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(PointerButtonState::RELEASED),
-            1 => Some(PointerButtonState::PRESSED),
+            0 => Some(PointerButtonState::Released),
+            1 => Some(PointerButtonState::Pressed),
             _ => None
         }
     }
@@ -120,19 +120,19 @@ pub trait PointerButtonStateSet {
 
 impl PointerButtonStateSet for u32 {
     fn is_released(&self) -> bool {
-        return self & (PointerButtonState::RELEASED as u32) != 0;
+        return self & (PointerButtonState::Released as u32) != 0;
     }
     fn is_pressed(&self) -> bool {
-        return self & (PointerButtonState::PRESSED as u32) != 0;
+        return self & (PointerButtonState::Pressed as u32) != 0;
     }
 }
 
 impl PointerButtonStateSet for i32 {
     fn is_released(&self) -> bool {
-        return self & (PointerButtonState::RELEASED as i32) != 0;
+        return self & (PointerButtonState::Released as i32) != 0;
     }
     fn is_pressed(&self) -> bool {
-        return self & (PointerButtonState::PRESSED as i32) != 0;
+        return self & (PointerButtonState::Pressed as i32) != 0;
     }
 }
 
@@ -141,15 +141,15 @@ impl PointerButtonStateSet for i32 {
 #[repr(C)]
 #[derive(Debug)]
 pub enum PointerAxis {
-    VERTICALSCROLL = 0,
-    HORIZONTALSCROLL = 1,
+    VerticalScroll = 0,
+    HorizontalScroll = 1,
 }
 
 impl FromPrimitive for PointerAxis {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(PointerAxis::VERTICALSCROLL),
-            1 => Some(PointerAxis::HORIZONTALSCROLL),
+            0 => Some(PointerAxis::VerticalScroll),
+            1 => Some(PointerAxis::HorizontalScroll),
             _ => None
         }
     }
@@ -166,19 +166,19 @@ pub trait PointerAxisSet {
 
 impl PointerAxisSet for u32 {
     fn is_vertical_scroll(&self) -> bool {
-        return self & (PointerAxis::VERTICALSCROLL as u32) != 0;
+        return self & (PointerAxis::VerticalScroll as u32) != 0;
     }
     fn is_horizontal_scroll(&self) -> bool {
-        return self & (PointerAxis::HORIZONTALSCROLL as u32) != 0;
+        return self & (PointerAxis::HorizontalScroll as u32) != 0;
     }
 }
 
 impl PointerAxisSet for i32 {
     fn is_vertical_scroll(&self) -> bool {
-        return self & (PointerAxis::VERTICALSCROLL as i32) != 0;
+        return self & (PointerAxis::VerticalScroll as i32) != 0;
     }
     fn is_horizontal_scroll(&self) -> bool {
-        return self & (PointerAxis::HORIZONTALSCROLL as i32) != 0;
+        return self & (PointerAxis::HorizontalScroll as i32) != 0;
     }
 }
 

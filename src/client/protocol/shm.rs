@@ -47,19 +47,19 @@ extern {
 #[derive(Debug)]
 pub enum ShmError {
     /// buffer format is not known
-    INVALIDFORMAT = 0,
+    InvalidFormat = 0,
     /// invalid size or stride during pool or buffer creation
-    INVALIDSTRIDE = 1,
+    InvalidStride = 1,
     /// mmapping the file descriptor failed
-    INVALIDFD = 2,
+    InvalidFd = 2,
 }
 
 impl FromPrimitive for ShmError {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(ShmError::INVALIDFORMAT),
-            1 => Some(ShmError::INVALIDSTRIDE),
-            2 => Some(ShmError::INVALIDFD),
+            0 => Some(ShmError::InvalidFormat),
+            1 => Some(ShmError::InvalidStride),
+            2 => Some(ShmError::InvalidFd),
             _ => None
         }
     }
@@ -77,25 +77,25 @@ pub trait ShmErrorSet {
 
 impl ShmErrorSet for u32 {
     fn is_invalid_format(&self) -> bool {
-        return self & (ShmError::INVALIDFORMAT as u32) != 0;
+        return self & (ShmError::InvalidFormat as u32) != 0;
     }
     fn is_invalid_stride(&self) -> bool {
-        return self & (ShmError::INVALIDSTRIDE as u32) != 0;
+        return self & (ShmError::InvalidStride as u32) != 0;
     }
     fn is_invalid_fd(&self) -> bool {
-        return self & (ShmError::INVALIDFD as u32) != 0;
+        return self & (ShmError::InvalidFd as u32) != 0;
     }
 }
 
 impl ShmErrorSet for i32 {
     fn is_invalid_format(&self) -> bool {
-        return self & (ShmError::INVALIDFORMAT as i32) != 0;
+        return self & (ShmError::InvalidFormat as i32) != 0;
     }
     fn is_invalid_stride(&self) -> bool {
-        return self & (ShmError::INVALIDSTRIDE as i32) != 0;
+        return self & (ShmError::InvalidStride as i32) != 0;
     }
     fn is_invalid_fd(&self) -> bool {
-        return self & (ShmError::INVALIDFD as i32) != 0;
+        return self & (ShmError::InvalidFd as i32) != 0;
     }
 }
 
@@ -109,128 +109,128 @@ impl ShmErrorSet for i32 {
 #[derive(Debug)]
 pub enum ShmFormat {
     /// 32-bit ARGB format
-    ARGB8888 = 0,
+    Argb8888 = 0,
     /// 32-bit RGB format
-    XRGB8888 = 1,
+    Xrgb8888 = 1,
     C8 = 0x20203843,
-    RGB332 = 0x38424752,
-    BGR233 = 0x38524742,
-    XRGB4444 = 0x32315258,
-    XBGR4444 = 0x32314258,
-    RGBX4444 = 0x32315852,
-    BGRX4444 = 0x32315842,
-    ARGB4444 = 0x32315241,
-    ABGR4444 = 0x32314241,
-    RGBA4444 = 0x32314152,
-    BGRA4444 = 0x32314142,
-    XRGB1555 = 0x35315258,
-    XBGR1555 = 0x35314258,
-    RGBX5551 = 0x35315852,
-    BGRX5551 = 0x35315842,
-    ARGB1555 = 0x35315241,
-    ABGR1555 = 0x35314241,
-    RGBA5551 = 0x35314152,
-    BGRA5551 = 0x35314142,
-    RGB565 = 0x36314752,
-    BGR565 = 0x36314742,
-    RGB888 = 0x34324752,
-    BGR888 = 0x34324742,
-    XBGR8888 = 0x34324258,
-    RGBX8888 = 0x34325852,
-    BGRX8888 = 0x34325842,
-    ABGR8888 = 0x34324241,
-    RGBA8888 = 0x34324152,
-    BGRA8888 = 0x34324142,
-    XRGB2101010 = 0x30335258,
-    XBGR2101010 = 0x30334258,
-    RGBX1010102 = 0x30335852,
-    BGRX1010102 = 0x30335842,
-    ARGB2101010 = 0x30335241,
-    ABGR2101010 = 0x30334241,
-    RGBA1010102 = 0x30334152,
-    BGRA1010102 = 0x30334142,
-    YUYV = 0x56595559,
-    YVYU = 0x55595659,
-    UYVY = 0x59565955,
-    VYUY = 0x59555956,
-    AYUV = 0x56555941,
-    NV12 = 0x3231564e,
-    NV21 = 0x3132564e,
-    NV16 = 0x3631564e,
-    NV61 = 0x3136564e,
-    YUV410 = 0x39565559,
-    YVU410 = 0x39555659,
-    YUV411 = 0x31315559,
-    YVU411 = 0x31315659,
-    YUV420 = 0x32315559,
-    YVU420 = 0x32315659,
-    YUV422 = 0x36315559,
-    YVU422 = 0x36315659,
-    YUV444 = 0x34325559,
-    YVU444 = 0x34325659,
+    Rgb332 = 0x38424752,
+    Bgr233 = 0x38524742,
+    Xrgb4444 = 0x32315258,
+    Xbgr4444 = 0x32314258,
+    Rgbx4444 = 0x32315852,
+    Bgrx4444 = 0x32315842,
+    Argb4444 = 0x32315241,
+    Abgr4444 = 0x32314241,
+    Rgba4444 = 0x32314152,
+    Bgra4444 = 0x32314142,
+    Xrgb1555 = 0x35315258,
+    Xbgr1555 = 0x35314258,
+    Rgbx5551 = 0x35315852,
+    Bgrx5551 = 0x35315842,
+    Argb1555 = 0x35315241,
+    Abgr1555 = 0x35314241,
+    Rgba5551 = 0x35314152,
+    Bgra5551 = 0x35314142,
+    Rgb565 = 0x36314752,
+    Bgr565 = 0x36314742,
+    Rgb888 = 0x34324752,
+    Bgr888 = 0x34324742,
+    Xbgr8888 = 0x34324258,
+    Rgbx8888 = 0x34325852,
+    Bgrx8888 = 0x34325842,
+    Abgr8888 = 0x34324241,
+    Rgba8888 = 0x34324152,
+    Bgra8888 = 0x34324142,
+    Xrgb2101010 = 0x30335258,
+    Xbgr2101010 = 0x30334258,
+    Rgbx1010102 = 0x30335852,
+    Bgrx1010102 = 0x30335842,
+    Argb2101010 = 0x30335241,
+    Abgr2101010 = 0x30334241,
+    Rgba1010102 = 0x30334152,
+    Bgra1010102 = 0x30334142,
+    Yuyv = 0x56595559,
+    Yvyu = 0x55595659,
+    Uyvy = 0x59565955,
+    Vyuy = 0x59555956,
+    Ayuv = 0x56555941,
+    Nv12 = 0x3231564e,
+    Nv21 = 0x3132564e,
+    Nv16 = 0x3631564e,
+    Nv61 = 0x3136564e,
+    Yuv410 = 0x39565559,
+    Yvu410 = 0x39555659,
+    Yuv411 = 0x31315559,
+    Yvu411 = 0x31315659,
+    Yuv420 = 0x32315559,
+    Yvu420 = 0x32315659,
+    Yuv422 = 0x36315559,
+    Yvu422 = 0x36315659,
+    Yuv444 = 0x34325559,
+    Yvu444 = 0x34325659,
 }
 
 impl FromPrimitive for ShmFormat {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(ShmFormat::ARGB8888),
-            1 => Some(ShmFormat::XRGB8888),
+            0 => Some(ShmFormat::Argb8888),
+            1 => Some(ShmFormat::Xrgb8888),
             0x20203843 => Some(ShmFormat::C8),
-            0x38424752 => Some(ShmFormat::RGB332),
-            0x38524742 => Some(ShmFormat::BGR233),
-            0x32315258 => Some(ShmFormat::XRGB4444),
-            0x32314258 => Some(ShmFormat::XBGR4444),
-            0x32315852 => Some(ShmFormat::RGBX4444),
-            0x32315842 => Some(ShmFormat::BGRX4444),
-            0x32315241 => Some(ShmFormat::ARGB4444),
-            0x32314241 => Some(ShmFormat::ABGR4444),
-            0x32314152 => Some(ShmFormat::RGBA4444),
-            0x32314142 => Some(ShmFormat::BGRA4444),
-            0x35315258 => Some(ShmFormat::XRGB1555),
-            0x35314258 => Some(ShmFormat::XBGR1555),
-            0x35315852 => Some(ShmFormat::RGBX5551),
-            0x35315842 => Some(ShmFormat::BGRX5551),
-            0x35315241 => Some(ShmFormat::ARGB1555),
-            0x35314241 => Some(ShmFormat::ABGR1555),
-            0x35314152 => Some(ShmFormat::RGBA5551),
-            0x35314142 => Some(ShmFormat::BGRA5551),
-            0x36314752 => Some(ShmFormat::RGB565),
-            0x36314742 => Some(ShmFormat::BGR565),
-            0x34324752 => Some(ShmFormat::RGB888),
-            0x34324742 => Some(ShmFormat::BGR888),
-            0x34324258 => Some(ShmFormat::XBGR8888),
-            0x34325852 => Some(ShmFormat::RGBX8888),
-            0x34325842 => Some(ShmFormat::BGRX8888),
-            0x34324241 => Some(ShmFormat::ABGR8888),
-            0x34324152 => Some(ShmFormat::RGBA8888),
-            0x34324142 => Some(ShmFormat::BGRA8888),
-            0x30335258 => Some(ShmFormat::XRGB2101010),
-            0x30334258 => Some(ShmFormat::XBGR2101010),
-            0x30335852 => Some(ShmFormat::RGBX1010102),
-            0x30335842 => Some(ShmFormat::BGRX1010102),
-            0x30335241 => Some(ShmFormat::ARGB2101010),
-            0x30334241 => Some(ShmFormat::ABGR2101010),
-            0x30334152 => Some(ShmFormat::RGBA1010102),
-            0x30334142 => Some(ShmFormat::BGRA1010102),
-            0x56595559 => Some(ShmFormat::YUYV),
-            0x55595659 => Some(ShmFormat::YVYU),
-            0x59565955 => Some(ShmFormat::UYVY),
-            0x59555956 => Some(ShmFormat::VYUY),
-            0x56555941 => Some(ShmFormat::AYUV),
-            0x3231564e => Some(ShmFormat::NV12),
-            0x3132564e => Some(ShmFormat::NV21),
-            0x3631564e => Some(ShmFormat::NV16),
-            0x3136564e => Some(ShmFormat::NV61),
-            0x39565559 => Some(ShmFormat::YUV410),
-            0x39555659 => Some(ShmFormat::YVU410),
-            0x31315559 => Some(ShmFormat::YUV411),
-            0x31315659 => Some(ShmFormat::YVU411),
-            0x32315559 => Some(ShmFormat::YUV420),
-            0x32315659 => Some(ShmFormat::YVU420),
-            0x36315559 => Some(ShmFormat::YUV422),
-            0x36315659 => Some(ShmFormat::YVU422),
-            0x34325559 => Some(ShmFormat::YUV444),
-            0x34325659 => Some(ShmFormat::YVU444),
+            0x38424752 => Some(ShmFormat::Rgb332),
+            0x38524742 => Some(ShmFormat::Bgr233),
+            0x32315258 => Some(ShmFormat::Xrgb4444),
+            0x32314258 => Some(ShmFormat::Xbgr4444),
+            0x32315852 => Some(ShmFormat::Rgbx4444),
+            0x32315842 => Some(ShmFormat::Bgrx4444),
+            0x32315241 => Some(ShmFormat::Argb4444),
+            0x32314241 => Some(ShmFormat::Abgr4444),
+            0x32314152 => Some(ShmFormat::Rgba4444),
+            0x32314142 => Some(ShmFormat::Bgra4444),
+            0x35315258 => Some(ShmFormat::Xrgb1555),
+            0x35314258 => Some(ShmFormat::Xbgr1555),
+            0x35315852 => Some(ShmFormat::Rgbx5551),
+            0x35315842 => Some(ShmFormat::Bgrx5551),
+            0x35315241 => Some(ShmFormat::Argb1555),
+            0x35314241 => Some(ShmFormat::Abgr1555),
+            0x35314152 => Some(ShmFormat::Rgba5551),
+            0x35314142 => Some(ShmFormat::Bgra5551),
+            0x36314752 => Some(ShmFormat::Rgb565),
+            0x36314742 => Some(ShmFormat::Bgr565),
+            0x34324752 => Some(ShmFormat::Rgb888),
+            0x34324742 => Some(ShmFormat::Bgr888),
+            0x34324258 => Some(ShmFormat::Xbgr8888),
+            0x34325852 => Some(ShmFormat::Rgbx8888),
+            0x34325842 => Some(ShmFormat::Bgrx8888),
+            0x34324241 => Some(ShmFormat::Abgr8888),
+            0x34324152 => Some(ShmFormat::Rgba8888),
+            0x34324142 => Some(ShmFormat::Bgra8888),
+            0x30335258 => Some(ShmFormat::Xrgb2101010),
+            0x30334258 => Some(ShmFormat::Xbgr2101010),
+            0x30335852 => Some(ShmFormat::Rgbx1010102),
+            0x30335842 => Some(ShmFormat::Bgrx1010102),
+            0x30335241 => Some(ShmFormat::Argb2101010),
+            0x30334241 => Some(ShmFormat::Abgr2101010),
+            0x30334152 => Some(ShmFormat::Rgba1010102),
+            0x30334142 => Some(ShmFormat::Bgra1010102),
+            0x56595559 => Some(ShmFormat::Yuyv),
+            0x55595659 => Some(ShmFormat::Yvyu),
+            0x59565955 => Some(ShmFormat::Uyvy),
+            0x59555956 => Some(ShmFormat::Vyuy),
+            0x56555941 => Some(ShmFormat::Ayuv),
+            0x3231564e => Some(ShmFormat::Nv12),
+            0x3132564e => Some(ShmFormat::Nv21),
+            0x3631564e => Some(ShmFormat::Nv16),
+            0x3136564e => Some(ShmFormat::Nv61),
+            0x39565559 => Some(ShmFormat::Yuv410),
+            0x39555659 => Some(ShmFormat::Yvu410),
+            0x31315559 => Some(ShmFormat::Yuv411),
+            0x31315659 => Some(ShmFormat::Yvu411),
+            0x32315559 => Some(ShmFormat::Yuv420),
+            0x32315659 => Some(ShmFormat::Yvu420),
+            0x36315559 => Some(ShmFormat::Yuv422),
+            0x36315659 => Some(ShmFormat::Yvu422),
+            0x34325559 => Some(ShmFormat::Yuv444),
+            0x34325659 => Some(ShmFormat::Yvu444),
             _ => None
         }
     }
@@ -303,355 +303,355 @@ pub trait ShmFormatSet {
 
 impl ShmFormatSet for u32 {
     fn is_argb8888(&self) -> bool {
-        return self & (ShmFormat::ARGB8888 as u32) != 0;
+        return self & (ShmFormat::Argb8888 as u32) != 0;
     }
     fn is_xrgb8888(&self) -> bool {
-        return self & (ShmFormat::XRGB8888 as u32) != 0;
+        return self & (ShmFormat::Xrgb8888 as u32) != 0;
     }
     fn is_c8(&self) -> bool {
         return self & (ShmFormat::C8 as u32) != 0;
     }
     fn is_rgb332(&self) -> bool {
-        return self & (ShmFormat::RGB332 as u32) != 0;
+        return self & (ShmFormat::Rgb332 as u32) != 0;
     }
     fn is_bgr233(&self) -> bool {
-        return self & (ShmFormat::BGR233 as u32) != 0;
+        return self & (ShmFormat::Bgr233 as u32) != 0;
     }
     fn is_xrgb4444(&self) -> bool {
-        return self & (ShmFormat::XRGB4444 as u32) != 0;
+        return self & (ShmFormat::Xrgb4444 as u32) != 0;
     }
     fn is_xbgr4444(&self) -> bool {
-        return self & (ShmFormat::XBGR4444 as u32) != 0;
+        return self & (ShmFormat::Xbgr4444 as u32) != 0;
     }
     fn is_rgbx4444(&self) -> bool {
-        return self & (ShmFormat::RGBX4444 as u32) != 0;
+        return self & (ShmFormat::Rgbx4444 as u32) != 0;
     }
     fn is_bgrx4444(&self) -> bool {
-        return self & (ShmFormat::BGRX4444 as u32) != 0;
+        return self & (ShmFormat::Bgrx4444 as u32) != 0;
     }
     fn is_argb4444(&self) -> bool {
-        return self & (ShmFormat::ARGB4444 as u32) != 0;
+        return self & (ShmFormat::Argb4444 as u32) != 0;
     }
     fn is_abgr4444(&self) -> bool {
-        return self & (ShmFormat::ABGR4444 as u32) != 0;
+        return self & (ShmFormat::Abgr4444 as u32) != 0;
     }
     fn is_rgba4444(&self) -> bool {
-        return self & (ShmFormat::RGBA4444 as u32) != 0;
+        return self & (ShmFormat::Rgba4444 as u32) != 0;
     }
     fn is_bgra4444(&self) -> bool {
-        return self & (ShmFormat::BGRA4444 as u32) != 0;
+        return self & (ShmFormat::Bgra4444 as u32) != 0;
     }
     fn is_xrgb1555(&self) -> bool {
-        return self & (ShmFormat::XRGB1555 as u32) != 0;
+        return self & (ShmFormat::Xrgb1555 as u32) != 0;
     }
     fn is_xbgr1555(&self) -> bool {
-        return self & (ShmFormat::XBGR1555 as u32) != 0;
+        return self & (ShmFormat::Xbgr1555 as u32) != 0;
     }
     fn is_rgbx5551(&self) -> bool {
-        return self & (ShmFormat::RGBX5551 as u32) != 0;
+        return self & (ShmFormat::Rgbx5551 as u32) != 0;
     }
     fn is_bgrx5551(&self) -> bool {
-        return self & (ShmFormat::BGRX5551 as u32) != 0;
+        return self & (ShmFormat::Bgrx5551 as u32) != 0;
     }
     fn is_argb1555(&self) -> bool {
-        return self & (ShmFormat::ARGB1555 as u32) != 0;
+        return self & (ShmFormat::Argb1555 as u32) != 0;
     }
     fn is_abgr1555(&self) -> bool {
-        return self & (ShmFormat::ABGR1555 as u32) != 0;
+        return self & (ShmFormat::Abgr1555 as u32) != 0;
     }
     fn is_rgba5551(&self) -> bool {
-        return self & (ShmFormat::RGBA5551 as u32) != 0;
+        return self & (ShmFormat::Rgba5551 as u32) != 0;
     }
     fn is_bgra5551(&self) -> bool {
-        return self & (ShmFormat::BGRA5551 as u32) != 0;
+        return self & (ShmFormat::Bgra5551 as u32) != 0;
     }
     fn is_rgb565(&self) -> bool {
-        return self & (ShmFormat::RGB565 as u32) != 0;
+        return self & (ShmFormat::Rgb565 as u32) != 0;
     }
     fn is_bgr565(&self) -> bool {
-        return self & (ShmFormat::BGR565 as u32) != 0;
+        return self & (ShmFormat::Bgr565 as u32) != 0;
     }
     fn is_rgb888(&self) -> bool {
-        return self & (ShmFormat::RGB888 as u32) != 0;
+        return self & (ShmFormat::Rgb888 as u32) != 0;
     }
     fn is_bgr888(&self) -> bool {
-        return self & (ShmFormat::BGR888 as u32) != 0;
+        return self & (ShmFormat::Bgr888 as u32) != 0;
     }
     fn is_xbgr8888(&self) -> bool {
-        return self & (ShmFormat::XBGR8888 as u32) != 0;
+        return self & (ShmFormat::Xbgr8888 as u32) != 0;
     }
     fn is_rgbx8888(&self) -> bool {
-        return self & (ShmFormat::RGBX8888 as u32) != 0;
+        return self & (ShmFormat::Rgbx8888 as u32) != 0;
     }
     fn is_bgrx8888(&self) -> bool {
-        return self & (ShmFormat::BGRX8888 as u32) != 0;
+        return self & (ShmFormat::Bgrx8888 as u32) != 0;
     }
     fn is_abgr8888(&self) -> bool {
-        return self & (ShmFormat::ABGR8888 as u32) != 0;
+        return self & (ShmFormat::Abgr8888 as u32) != 0;
     }
     fn is_rgba8888(&self) -> bool {
-        return self & (ShmFormat::RGBA8888 as u32) != 0;
+        return self & (ShmFormat::Rgba8888 as u32) != 0;
     }
     fn is_bgra8888(&self) -> bool {
-        return self & (ShmFormat::BGRA8888 as u32) != 0;
+        return self & (ShmFormat::Bgra8888 as u32) != 0;
     }
     fn is_xrgb2101010(&self) -> bool {
-        return self & (ShmFormat::XRGB2101010 as u32) != 0;
+        return self & (ShmFormat::Xrgb2101010 as u32) != 0;
     }
     fn is_xbgr2101010(&self) -> bool {
-        return self & (ShmFormat::XBGR2101010 as u32) != 0;
+        return self & (ShmFormat::Xbgr2101010 as u32) != 0;
     }
     fn is_rgbx1010102(&self) -> bool {
-        return self & (ShmFormat::RGBX1010102 as u32) != 0;
+        return self & (ShmFormat::Rgbx1010102 as u32) != 0;
     }
     fn is_bgrx1010102(&self) -> bool {
-        return self & (ShmFormat::BGRX1010102 as u32) != 0;
+        return self & (ShmFormat::Bgrx1010102 as u32) != 0;
     }
     fn is_argb2101010(&self) -> bool {
-        return self & (ShmFormat::ARGB2101010 as u32) != 0;
+        return self & (ShmFormat::Argb2101010 as u32) != 0;
     }
     fn is_abgr2101010(&self) -> bool {
-        return self & (ShmFormat::ABGR2101010 as u32) != 0;
+        return self & (ShmFormat::Abgr2101010 as u32) != 0;
     }
     fn is_rgba1010102(&self) -> bool {
-        return self & (ShmFormat::RGBA1010102 as u32) != 0;
+        return self & (ShmFormat::Rgba1010102 as u32) != 0;
     }
     fn is_bgra1010102(&self) -> bool {
-        return self & (ShmFormat::BGRA1010102 as u32) != 0;
+        return self & (ShmFormat::Bgra1010102 as u32) != 0;
     }
     fn is_yuyv(&self) -> bool {
-        return self & (ShmFormat::YUYV as u32) != 0;
+        return self & (ShmFormat::Yuyv as u32) != 0;
     }
     fn is_yvyu(&self) -> bool {
-        return self & (ShmFormat::YVYU as u32) != 0;
+        return self & (ShmFormat::Yvyu as u32) != 0;
     }
     fn is_uyvy(&self) -> bool {
-        return self & (ShmFormat::UYVY as u32) != 0;
+        return self & (ShmFormat::Uyvy as u32) != 0;
     }
     fn is_vyuy(&self) -> bool {
-        return self & (ShmFormat::VYUY as u32) != 0;
+        return self & (ShmFormat::Vyuy as u32) != 0;
     }
     fn is_ayuv(&self) -> bool {
-        return self & (ShmFormat::AYUV as u32) != 0;
+        return self & (ShmFormat::Ayuv as u32) != 0;
     }
     fn is_nv12(&self) -> bool {
-        return self & (ShmFormat::NV12 as u32) != 0;
+        return self & (ShmFormat::Nv12 as u32) != 0;
     }
     fn is_nv21(&self) -> bool {
-        return self & (ShmFormat::NV21 as u32) != 0;
+        return self & (ShmFormat::Nv21 as u32) != 0;
     }
     fn is_nv16(&self) -> bool {
-        return self & (ShmFormat::NV16 as u32) != 0;
+        return self & (ShmFormat::Nv16 as u32) != 0;
     }
     fn is_nv61(&self) -> bool {
-        return self & (ShmFormat::NV61 as u32) != 0;
+        return self & (ShmFormat::Nv61 as u32) != 0;
     }
     fn is_yuv410(&self) -> bool {
-        return self & (ShmFormat::YUV410 as u32) != 0;
+        return self & (ShmFormat::Yuv410 as u32) != 0;
     }
     fn is_yvu410(&self) -> bool {
-        return self & (ShmFormat::YVU410 as u32) != 0;
+        return self & (ShmFormat::Yvu410 as u32) != 0;
     }
     fn is_yuv411(&self) -> bool {
-        return self & (ShmFormat::YUV411 as u32) != 0;
+        return self & (ShmFormat::Yuv411 as u32) != 0;
     }
     fn is_yvu411(&self) -> bool {
-        return self & (ShmFormat::YVU411 as u32) != 0;
+        return self & (ShmFormat::Yvu411 as u32) != 0;
     }
     fn is_yuv420(&self) -> bool {
-        return self & (ShmFormat::YUV420 as u32) != 0;
+        return self & (ShmFormat::Yuv420 as u32) != 0;
     }
     fn is_yvu420(&self) -> bool {
-        return self & (ShmFormat::YVU420 as u32) != 0;
+        return self & (ShmFormat::Yvu420 as u32) != 0;
     }
     fn is_yuv422(&self) -> bool {
-        return self & (ShmFormat::YUV422 as u32) != 0;
+        return self & (ShmFormat::Yuv422 as u32) != 0;
     }
     fn is_yvu422(&self) -> bool {
-        return self & (ShmFormat::YVU422 as u32) != 0;
+        return self & (ShmFormat::Yvu422 as u32) != 0;
     }
     fn is_yuv444(&self) -> bool {
-        return self & (ShmFormat::YUV444 as u32) != 0;
+        return self & (ShmFormat::Yuv444 as u32) != 0;
     }
     fn is_yvu444(&self) -> bool {
-        return self & (ShmFormat::YVU444 as u32) != 0;
+        return self & (ShmFormat::Yvu444 as u32) != 0;
     }
 }
 
 impl ShmFormatSet for i32 {
     fn is_argb8888(&self) -> bool {
-        return self & (ShmFormat::ARGB8888 as i32) != 0;
+        return self & (ShmFormat::Argb8888 as i32) != 0;
     }
     fn is_xrgb8888(&self) -> bool {
-        return self & (ShmFormat::XRGB8888 as i32) != 0;
+        return self & (ShmFormat::Xrgb8888 as i32) != 0;
     }
     fn is_c8(&self) -> bool {
         return self & (ShmFormat::C8 as i32) != 0;
     }
     fn is_rgb332(&self) -> bool {
-        return self & (ShmFormat::RGB332 as i32) != 0;
+        return self & (ShmFormat::Rgb332 as i32) != 0;
     }
     fn is_bgr233(&self) -> bool {
-        return self & (ShmFormat::BGR233 as i32) != 0;
+        return self & (ShmFormat::Bgr233 as i32) != 0;
     }
     fn is_xrgb4444(&self) -> bool {
-        return self & (ShmFormat::XRGB4444 as i32) != 0;
+        return self & (ShmFormat::Xrgb4444 as i32) != 0;
     }
     fn is_xbgr4444(&self) -> bool {
-        return self & (ShmFormat::XBGR4444 as i32) != 0;
+        return self & (ShmFormat::Xbgr4444 as i32) != 0;
     }
     fn is_rgbx4444(&self) -> bool {
-        return self & (ShmFormat::RGBX4444 as i32) != 0;
+        return self & (ShmFormat::Rgbx4444 as i32) != 0;
     }
     fn is_bgrx4444(&self) -> bool {
-        return self & (ShmFormat::BGRX4444 as i32) != 0;
+        return self & (ShmFormat::Bgrx4444 as i32) != 0;
     }
     fn is_argb4444(&self) -> bool {
-        return self & (ShmFormat::ARGB4444 as i32) != 0;
+        return self & (ShmFormat::Argb4444 as i32) != 0;
     }
     fn is_abgr4444(&self) -> bool {
-        return self & (ShmFormat::ABGR4444 as i32) != 0;
+        return self & (ShmFormat::Abgr4444 as i32) != 0;
     }
     fn is_rgba4444(&self) -> bool {
-        return self & (ShmFormat::RGBA4444 as i32) != 0;
+        return self & (ShmFormat::Rgba4444 as i32) != 0;
     }
     fn is_bgra4444(&self) -> bool {
-        return self & (ShmFormat::BGRA4444 as i32) != 0;
+        return self & (ShmFormat::Bgra4444 as i32) != 0;
     }
     fn is_xrgb1555(&self) -> bool {
-        return self & (ShmFormat::XRGB1555 as i32) != 0;
+        return self & (ShmFormat::Xrgb1555 as i32) != 0;
     }
     fn is_xbgr1555(&self) -> bool {
-        return self & (ShmFormat::XBGR1555 as i32) != 0;
+        return self & (ShmFormat::Xbgr1555 as i32) != 0;
     }
     fn is_rgbx5551(&self) -> bool {
-        return self & (ShmFormat::RGBX5551 as i32) != 0;
+        return self & (ShmFormat::Rgbx5551 as i32) != 0;
     }
     fn is_bgrx5551(&self) -> bool {
-        return self & (ShmFormat::BGRX5551 as i32) != 0;
+        return self & (ShmFormat::Bgrx5551 as i32) != 0;
     }
     fn is_argb1555(&self) -> bool {
-        return self & (ShmFormat::ARGB1555 as i32) != 0;
+        return self & (ShmFormat::Argb1555 as i32) != 0;
     }
     fn is_abgr1555(&self) -> bool {
-        return self & (ShmFormat::ABGR1555 as i32) != 0;
+        return self & (ShmFormat::Abgr1555 as i32) != 0;
     }
     fn is_rgba5551(&self) -> bool {
-        return self & (ShmFormat::RGBA5551 as i32) != 0;
+        return self & (ShmFormat::Rgba5551 as i32) != 0;
     }
     fn is_bgra5551(&self) -> bool {
-        return self & (ShmFormat::BGRA5551 as i32) != 0;
+        return self & (ShmFormat::Bgra5551 as i32) != 0;
     }
     fn is_rgb565(&self) -> bool {
-        return self & (ShmFormat::RGB565 as i32) != 0;
+        return self & (ShmFormat::Rgb565 as i32) != 0;
     }
     fn is_bgr565(&self) -> bool {
-        return self & (ShmFormat::BGR565 as i32) != 0;
+        return self & (ShmFormat::Bgr565 as i32) != 0;
     }
     fn is_rgb888(&self) -> bool {
-        return self & (ShmFormat::RGB888 as i32) != 0;
+        return self & (ShmFormat::Rgb888 as i32) != 0;
     }
     fn is_bgr888(&self) -> bool {
-        return self & (ShmFormat::BGR888 as i32) != 0;
+        return self & (ShmFormat::Bgr888 as i32) != 0;
     }
     fn is_xbgr8888(&self) -> bool {
-        return self & (ShmFormat::XBGR8888 as i32) != 0;
+        return self & (ShmFormat::Xbgr8888 as i32) != 0;
     }
     fn is_rgbx8888(&self) -> bool {
-        return self & (ShmFormat::RGBX8888 as i32) != 0;
+        return self & (ShmFormat::Rgbx8888 as i32) != 0;
     }
     fn is_bgrx8888(&self) -> bool {
-        return self & (ShmFormat::BGRX8888 as i32) != 0;
+        return self & (ShmFormat::Bgrx8888 as i32) != 0;
     }
     fn is_abgr8888(&self) -> bool {
-        return self & (ShmFormat::ABGR8888 as i32) != 0;
+        return self & (ShmFormat::Abgr8888 as i32) != 0;
     }
     fn is_rgba8888(&self) -> bool {
-        return self & (ShmFormat::RGBA8888 as i32) != 0;
+        return self & (ShmFormat::Rgba8888 as i32) != 0;
     }
     fn is_bgra8888(&self) -> bool {
-        return self & (ShmFormat::BGRA8888 as i32) != 0;
+        return self & (ShmFormat::Bgra8888 as i32) != 0;
     }
     fn is_xrgb2101010(&self) -> bool {
-        return self & (ShmFormat::XRGB2101010 as i32) != 0;
+        return self & (ShmFormat::Xrgb2101010 as i32) != 0;
     }
     fn is_xbgr2101010(&self) -> bool {
-        return self & (ShmFormat::XBGR2101010 as i32) != 0;
+        return self & (ShmFormat::Xbgr2101010 as i32) != 0;
     }
     fn is_rgbx1010102(&self) -> bool {
-        return self & (ShmFormat::RGBX1010102 as i32) != 0;
+        return self & (ShmFormat::Rgbx1010102 as i32) != 0;
     }
     fn is_bgrx1010102(&self) -> bool {
-        return self & (ShmFormat::BGRX1010102 as i32) != 0;
+        return self & (ShmFormat::Bgrx1010102 as i32) != 0;
     }
     fn is_argb2101010(&self) -> bool {
-        return self & (ShmFormat::ARGB2101010 as i32) != 0;
+        return self & (ShmFormat::Argb2101010 as i32) != 0;
     }
     fn is_abgr2101010(&self) -> bool {
-        return self & (ShmFormat::ABGR2101010 as i32) != 0;
+        return self & (ShmFormat::Abgr2101010 as i32) != 0;
     }
     fn is_rgba1010102(&self) -> bool {
-        return self & (ShmFormat::RGBA1010102 as i32) != 0;
+        return self & (ShmFormat::Rgba1010102 as i32) != 0;
     }
     fn is_bgra1010102(&self) -> bool {
-        return self & (ShmFormat::BGRA1010102 as i32) != 0;
+        return self & (ShmFormat::Bgra1010102 as i32) != 0;
     }
     fn is_yuyv(&self) -> bool {
-        return self & (ShmFormat::YUYV as i32) != 0;
+        return self & (ShmFormat::Yuyv as i32) != 0;
     }
     fn is_yvyu(&self) -> bool {
-        return self & (ShmFormat::YVYU as i32) != 0;
+        return self & (ShmFormat::Yvyu as i32) != 0;
     }
     fn is_uyvy(&self) -> bool {
-        return self & (ShmFormat::UYVY as i32) != 0;
+        return self & (ShmFormat::Uyvy as i32) != 0;
     }
     fn is_vyuy(&self) -> bool {
-        return self & (ShmFormat::VYUY as i32) != 0;
+        return self & (ShmFormat::Vyuy as i32) != 0;
     }
     fn is_ayuv(&self) -> bool {
-        return self & (ShmFormat::AYUV as i32) != 0;
+        return self & (ShmFormat::Ayuv as i32) != 0;
     }
     fn is_nv12(&self) -> bool {
-        return self & (ShmFormat::NV12 as i32) != 0;
+        return self & (ShmFormat::Nv12 as i32) != 0;
     }
     fn is_nv21(&self) -> bool {
-        return self & (ShmFormat::NV21 as i32) != 0;
+        return self & (ShmFormat::Nv21 as i32) != 0;
     }
     fn is_nv16(&self) -> bool {
-        return self & (ShmFormat::NV16 as i32) != 0;
+        return self & (ShmFormat::Nv16 as i32) != 0;
     }
     fn is_nv61(&self) -> bool {
-        return self & (ShmFormat::NV61 as i32) != 0;
+        return self & (ShmFormat::Nv61 as i32) != 0;
     }
     fn is_yuv410(&self) -> bool {
-        return self & (ShmFormat::YUV410 as i32) != 0;
+        return self & (ShmFormat::Yuv410 as i32) != 0;
     }
     fn is_yvu410(&self) -> bool {
-        return self & (ShmFormat::YVU410 as i32) != 0;
+        return self & (ShmFormat::Yvu410 as i32) != 0;
     }
     fn is_yuv411(&self) -> bool {
-        return self & (ShmFormat::YUV411 as i32) != 0;
+        return self & (ShmFormat::Yuv411 as i32) != 0;
     }
     fn is_yvu411(&self) -> bool {
-        return self & (ShmFormat::YVU411 as i32) != 0;
+        return self & (ShmFormat::Yvu411 as i32) != 0;
     }
     fn is_yuv420(&self) -> bool {
-        return self & (ShmFormat::YUV420 as i32) != 0;
+        return self & (ShmFormat::Yuv420 as i32) != 0;
     }
     fn is_yvu420(&self) -> bool {
-        return self & (ShmFormat::YVU420 as i32) != 0;
+        return self & (ShmFormat::Yvu420 as i32) != 0;
     }
     fn is_yuv422(&self) -> bool {
-        return self & (ShmFormat::YUV422 as i32) != 0;
+        return self & (ShmFormat::Yuv422 as i32) != 0;
     }
     fn is_yvu422(&self) -> bool {
-        return self & (ShmFormat::YVU422 as i32) != 0;
+        return self & (ShmFormat::Yvu422 as i32) != 0;
     }
     fn is_yuv444(&self) -> bool {
-        return self & (ShmFormat::YUV444 as i32) != 0;
+        return self & (ShmFormat::Yuv444 as i32) != 0;
     }
     fn is_yvu444(&self) -> bool {
-        return self & (ShmFormat::YVU444 as i32) != 0;
+        return self & (ShmFormat::Yvu444 as i32) != 0;
     }
 }
 

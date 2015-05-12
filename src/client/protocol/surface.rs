@@ -47,16 +47,16 @@ extern {
 #[derive(Debug)]
 pub enum SurfaceError {
     /// buffer scale value is invalid
-    INVALIDSCALE = 0,
+    InvalidScale = 0,
     /// buffer transform value is invalid
-    INVALIDTRANSFORM = 1,
+    InvalidTransform = 1,
 }
 
 impl FromPrimitive for SurfaceError {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(SurfaceError::INVALIDSCALE),
-            1 => Some(SurfaceError::INVALIDTRANSFORM),
+            0 => Some(SurfaceError::InvalidScale),
+            1 => Some(SurfaceError::InvalidTransform),
             _ => None
         }
     }
@@ -73,19 +73,19 @@ pub trait SurfaceErrorSet {
 
 impl SurfaceErrorSet for u32 {
     fn is_invalid_scale(&self) -> bool {
-        return self & (SurfaceError::INVALIDSCALE as u32) != 0;
+        return self & (SurfaceError::InvalidScale as u32) != 0;
     }
     fn is_invalid_transform(&self) -> bool {
-        return self & (SurfaceError::INVALIDTRANSFORM as u32) != 0;
+        return self & (SurfaceError::InvalidTransform as u32) != 0;
     }
 }
 
 impl SurfaceErrorSet for i32 {
     fn is_invalid_scale(&self) -> bool {
-        return self & (SurfaceError::INVALIDSCALE as i32) != 0;
+        return self & (SurfaceError::InvalidScale as i32) != 0;
     }
     fn is_invalid_transform(&self) -> bool {
-        return self & (SurfaceError::INVALIDTRANSFORM as i32) != 0;
+        return self & (SurfaceError::InvalidTransform as i32) != 0;
     }
 }
 

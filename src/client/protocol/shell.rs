@@ -46,7 +46,7 @@ extern {
 #[derive(Debug)]
 pub enum ShellError {
     /// given wl_surface has another role
-    ROLE = 0,
+    Role = 0,
     
     _Dummy,
 }
@@ -54,7 +54,7 @@ pub enum ShellError {
 impl FromPrimitive for ShellError {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(ShellError::ROLE),
+            0 => Some(ShellError::Role),
             _ => None
         }
     }
@@ -71,7 +71,7 @@ pub trait ShellErrorSet {
 
 impl ShellErrorSet for u32 {
     fn is_role(&self) -> bool {
-        return self & (ShellError::ROLE as u32) != 0;
+        return self & (ShellError::Role as u32) != 0;
     }
     fn is_(&self) -> bool {
         return self & (ShellError::_Dummy as u32) != 0;
@@ -80,7 +80,7 @@ impl ShellErrorSet for u32 {
 
 impl ShellErrorSet for i32 {
     fn is_role(&self) -> bool {
-        return self & (ShellError::ROLE as i32) != 0;
+        return self & (ShellError::Role as i32) != 0;
     }
     fn is_(&self) -> bool {
         return self & (ShellError::_Dummy as i32) != 0;

@@ -48,16 +48,16 @@ extern {
 #[derive(Debug)]
 pub enum KeyboardKeymapFormat {
     /// no keymap; client must understand how to interpret the raw keycode
-    NOKEYMAP = 0,
+    NoKeymap = 0,
     /// libxkbcommon compatible; to determine the xkb keycode, clients must add 8 to the key event keycode
-    XKBV1 = 1,
+    XkbV1 = 1,
 }
 
 impl FromPrimitive for KeyboardKeymapFormat {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(KeyboardKeymapFormat::NOKEYMAP),
-            1 => Some(KeyboardKeymapFormat::XKBV1),
+            0 => Some(KeyboardKeymapFormat::NoKeymap),
+            1 => Some(KeyboardKeymapFormat::XkbV1),
             _ => None
         }
     }
@@ -74,19 +74,19 @@ pub trait KeyboardKeymapFormatSet {
 
 impl KeyboardKeymapFormatSet for u32 {
     fn is_no_keymap(&self) -> bool {
-        return self & (KeyboardKeymapFormat::NOKEYMAP as u32) != 0;
+        return self & (KeyboardKeymapFormat::NoKeymap as u32) != 0;
     }
     fn is_xkb_v1(&self) -> bool {
-        return self & (KeyboardKeymapFormat::XKBV1 as u32) != 0;
+        return self & (KeyboardKeymapFormat::XkbV1 as u32) != 0;
     }
 }
 
 impl KeyboardKeymapFormatSet for i32 {
     fn is_no_keymap(&self) -> bool {
-        return self & (KeyboardKeymapFormat::NOKEYMAP as i32) != 0;
+        return self & (KeyboardKeymapFormat::NoKeymap as i32) != 0;
     }
     fn is_xkb_v1(&self) -> bool {
-        return self & (KeyboardKeymapFormat::XKBV1 as i32) != 0;
+        return self & (KeyboardKeymapFormat::XkbV1 as i32) != 0;
     }
 }
 
@@ -96,16 +96,16 @@ impl KeyboardKeymapFormatSet for i32 {
 #[derive(Debug)]
 pub enum KeyboardKeyState {
     /// key is not pressed
-    RELEASED = 0,
+    Released = 0,
     /// key is pressed
-    PRESSED = 1,
+    Pressed = 1,
 }
 
 impl FromPrimitive for KeyboardKeyState {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(KeyboardKeyState::RELEASED),
-            1 => Some(KeyboardKeyState::PRESSED),
+            0 => Some(KeyboardKeyState::Released),
+            1 => Some(KeyboardKeyState::Pressed),
             _ => None
         }
     }
@@ -122,19 +122,19 @@ pub trait KeyboardKeyStateSet {
 
 impl KeyboardKeyStateSet for u32 {
     fn is_released(&self) -> bool {
-        return self & (KeyboardKeyState::RELEASED as u32) != 0;
+        return self & (KeyboardKeyState::Released as u32) != 0;
     }
     fn is_pressed(&self) -> bool {
-        return self & (KeyboardKeyState::PRESSED as u32) != 0;
+        return self & (KeyboardKeyState::Pressed as u32) != 0;
     }
 }
 
 impl KeyboardKeyStateSet for i32 {
     fn is_released(&self) -> bool {
-        return self & (KeyboardKeyState::RELEASED as i32) != 0;
+        return self & (KeyboardKeyState::Released as i32) != 0;
     }
     fn is_pressed(&self) -> bool {
-        return self & (KeyboardKeyState::PRESSED as i32) != 0;
+        return self & (KeyboardKeyState::Pressed as i32) != 0;
     }
 }
 
