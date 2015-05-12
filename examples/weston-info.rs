@@ -69,6 +69,42 @@ impl Info {
             output_data: Default::default(),
         };
     }
+
+    fn print_it(&self) {
+        for (key, val) in self.data.iter() {
+            println!("{}", val);
+            match key.as_ref() {
+                "wl_shm" => {
+                    println!("\tformats: {}",
+                             self.shm_data.formats.connect(" "));
+                },
+                "wl_seat" => {
+                    println!("\tname: {}", self.seat_data.name);
+                    println!("\tcapabilities: {}",
+                             self.seat_data.capabilities.connect(" "));
+                },
+                "wl_output" => {
+                    println!("\tx: {}, y: {},", self.output_data.x,
+                             self.output_data.y);
+                    println!("\tphysical_width: {} mm, physical_height: {} mm,",
+                             self.output_data.physical_width,
+                             self.output_data.physical_height);
+                    println!("\tmake: '{}', model: '{}',",
+                             self.output_data.make, self.output_data.model);
+                    println!("\tsubpixel_orientation: '{}', transformation: '{}',",
+                             self.output_data.subpixel,
+                             self.output_data.transform);
+                    for mode in self.output_data.modes.iter() {
+                        println!("\tmode:");
+                        println!("\t\twidth: {} px, height: {} px, refresh: {} Hz,",
+                                 mode.width, mode.height, mode.refresh / 1000);
+                        println!("\t\tflags: {}", mode.flags);
+                    }
+                }
+                _ => (),
+            }
+        }
+    }
 }
 
 impl RegistryEventHandler for Info {
@@ -173,4 +209,5 @@ fn main() {
         info.roundtrip = false;
         display.roundtrip();
     }
+    info.print_it();
 }
