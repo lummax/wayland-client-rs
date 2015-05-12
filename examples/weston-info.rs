@@ -9,13 +9,50 @@ use wayland_client::client::{FromPrimitive, Display,
                              Output, OutputEventHandler, OutputSubpixel,
                              OutputTransform, OutputMode};
 
-#[derive(Debug)]
+use std::collections::HashMap;
+
+#[derive(Default)]
+struct SeatData {
+    name: String,
+    capabilities: Vec<String>,
+}
+
+
+#[derive(Default)]
+struct ShmData {
+    formats: Vec<String>,
+}
+
+#[derive(Default)]
+struct OutputData {
+    x: i32,
+    y: i32,
+    physical_width: i32,
+    physical_height: i32,
+    subpixel: String,
+    make: String,
+    model: String,
+    transform: String,
+    modes: Vec<OutputModeData>,
+}
+
+struct OutputModeData {
+    width: i32,
+    height: i32,
+    refresh: i32,
+    flags: String,
+}
+
 struct Info {
     registry: Registry,
     seat: Option<Seat>,
     shm: Option<Shm>,
     output: Option<Output>,
     pub roundtrip: bool,
+    data: HashMap<String, String>,
+    seat_data: SeatData,
+    shm_data: ShmData,
+    output_data: OutputData,
 }
 
 impl Info {
@@ -26,6 +63,10 @@ impl Info {
             shm: None,
             output: None,
             roundtrip: true,
+            data: HashMap::new(),
+            seat_data: Default::default(),
+            shm_data: Default::default(),
+            output_data: Default::default(),
         };
     }
 }
