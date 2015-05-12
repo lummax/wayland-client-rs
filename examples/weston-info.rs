@@ -139,13 +139,13 @@ impl SeatEventHandler for Info {
     }
 
     fn on_capabilities(&mut self, capabilities: u32) {
-        if capabilities & (SeatCapability::Pointer as u32) != 0 {
+        if capabilities & (SeatCapability::POINTER as u32) != 0 {
             self.seat_data.capabilities.push("pointer".to_string());
         }
-        if capabilities & (SeatCapability::Keyboard as u32) != 0 {
+        if capabilities & (SeatCapability::KEYBOARD as u32) != 0 {
             self.seat_data.capabilities.push("keyboard".to_string());
         }
-        if capabilities & (SeatCapability::Touch as u32) != 0 {
+        if capabilities & (SeatCapability::TOUCH as u32) != 0 {
             self.seat_data.capabilities.push("touch".to_string());
         }
     }
@@ -185,10 +185,10 @@ impl OutputEventHandler for Info {
 
     fn on_mode(&mut self, flags: u32, width: i32, height: i32, refresh: i32) {
         let mut flags_ = Vec::new();
-        if flags & (OutputMode::Current as u32) != 0 {
+        if flags & (OutputMode::CURRENT as u32) != 0 {
             flags_.push("current".to_string());
         }
-        if flags & (OutputMode::Preferred as u32) != 0 {
+        if flags & (OutputMode::PREFERRED as u32) != 0 {
             flags_.push("preferred".to_string());
         }
         self.output_data.modes.push(OutputModeData {

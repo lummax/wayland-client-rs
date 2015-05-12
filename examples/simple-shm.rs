@@ -119,7 +119,7 @@ impl MyBuffer {
 
         let mut pool = shm.create_pool(file.as_raw_fd(), size).unwrap();
         let buffer = pool.create_buffer(0, width, height, width * 4,
-                                        ShmFormat::Xrgb8888 as u32).unwrap();
+                                        ShmFormat::XRGB8888 as u32).unwrap();
         pool.destroy();
         return Ok(Box::new(MyBuffer {
             buffer: buffer,
