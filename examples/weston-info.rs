@@ -125,7 +125,7 @@ impl ShmEventHandler for Info {
     }
 
     fn on_format(&mut self, format: u32) {
-        println!("on_format({:?})", ShmFormat::from_u32(format).unwrap());
+        self.shm_data.formats.push(format!("{:?}", ShmFormat::from_u32(format).unwrap()));
     }
 }
 
