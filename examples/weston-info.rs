@@ -4,7 +4,7 @@
 extern crate wayland_client;
 use wayland_client::client::{FromPrimitive, Display,
                              Registry, RegistryEventHandler,
-                             Seat, SeatEventHandler, SeatCapability,
+                             Seat, SeatEventHandler, SeatCapabilitySet,
                              Shm, ShmEventHandler, ShmFormat,
                              Output, OutputEventHandler, OutputSubpixel,
                              OutputTransform, OutputMode,
@@ -152,16 +152,16 @@ impl SeatEventHandler for Info {
     }
 
     fn on_capabilities(&mut self, capabilities: u32) {
-        if capabilities & (SeatCapability::POINTER as u32) != 0 {
+        if capabilities.has_pointer() {
             self.seat_data.capabilities.push("pointer".to_string());
         }
-        if capabilities & (SeatCapability::KEYBOARD as u32) != 0 {
+        if capabilities.has_keyboard() {
             self.seat_data.capabilities.push("keyboard".to_string());
             self.keyboard = self.get_seat().get_keyboard().ok();
             KeyboardEventHandler::connect_dispatcher(self);
             self.roundtrip = true;
         }
-        if capabilities & (SeatCapability::TOUCH as u32) != 0 {
+        if capabilities.has_touch() {
             self.seat_data.capabilities.push("touch".to_string());
         }
     }
