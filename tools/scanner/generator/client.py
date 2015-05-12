@@ -54,6 +54,7 @@ def generate_mod_file(protocol):
         exports = [interface.name]
         if interface.events: exports.append(interface.name + 'EventHandler')
         exports.extend(enum.name for enum in interface.enums)
+        exports.extend(enum.name + 'Set' for enum in interface.enums)
         modules.append({
             'module': interface.wl_name,
             'exports': ', '.join(exports),
@@ -152,11 +153,36 @@ impl FromPrimitive for {{name}} {
     fn from_i32(num: i32) -> Option<Self> {
         return Self::from_u32(num as u32);
     }
-}'''
+}
+
+{{#is_pub}}
+pub trait {{name}}Set {
+    {{#entries}}
+    fn has_{{wl_name}}(&self) -> bool;
+    {{/entries}}
+}
+
+impl {{name}}Set for u32 {
+    {{#entries}}
+    fn is_{{wl_name}}(&self) -> bool {
+        return self & ({{name}}::{{entry_name}} as u32) != 0;
+    }
+    {{/entries}}
+}
+
+impl {{name}}Set for i32 {
+    {{#entries}}
+    fn is_{{wl_name}}(&self) -> bool {
+        return self & ({{name}}::{{entry_name}} as i32) != 0;
+    }
+    {{/entries}}
+}
+{{/is_pub}}'''
 
 def generate_enum(enum):
     entries = list({'entry_description': process_description(entry.summary),
                     'entry_name': entry.name,
+                    'wl_name': entry.wl_name.lstrip('_'),
                     'entry_value': entry.value} for entry in enum.entries)
     if len(enum.entries) == 1:
         entries.append({

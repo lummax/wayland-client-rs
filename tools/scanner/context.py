@@ -11,7 +11,7 @@ DynamicRequest = namedtuple('DynamicRequest', 'name, method_name, description, a
 Event = namedtuple('Event', 'name, wl_name, description, arguments, since, opcode')
 Enum = namedtuple('Enum', 'name, wl_name, description, entries')
 Argument = namedtuple('Argument', 'name, type, interface, wl_interface, summary, allow_null')
-Entry = namedtuple('Entry', 'name, value, summary')
+Entry = namedtuple('Entry', 'name, wl_name, value, summary')
 
 def de_keyword_ize(name):
     keywords = ["as", "break", "crate", "else", "enum", "extern", "false",
@@ -111,5 +111,6 @@ def context_enum(node, interface):
 
 def context_entry(node):
     return Entry(name=classify_name(node.name).upper(),
+                 wl_name=de_keyword_ize(node.name),
                  value=node.value,
                  summary=node.summary)
