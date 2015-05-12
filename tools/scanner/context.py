@@ -110,7 +110,7 @@ def context_enum(node, interface):
                 entries=list(map(context_entry, node.entries)))
 
 def context_entry(node):
-    return Entry(name=classify_name(node.name).upper(),
+    return Entry(name=classify_name(node.name),
                  wl_name=de_keyword_ize(node.name),
                  value=node.value,
                  summary=node.summary)
