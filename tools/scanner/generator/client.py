@@ -41,6 +41,7 @@ use ffi;
 
 pub trait FromPrimitive {
     fn from_u32(num: u32) -> Option<Self>;
+    fn from_i32(num: i32) -> Option<Self>;
 }
 
 pub trait GetInterface {
@@ -146,6 +147,10 @@ impl FromPrimitive for {{name}} {
             {{/entries}}
             _ => None
         }
+    }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
     }
 }'''
 
