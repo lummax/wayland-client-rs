@@ -70,19 +70,19 @@ pub trait PointerErrorSet {
 }
 
 impl PointerErrorSet for u32 {
-    fn is_role(&self) -> bool {
+    fn has_role(&self) -> bool {
         return self & (PointerError::Role as u32) != 0;
     }
-    fn is_(&self) -> bool {
+    fn has_(&self) -> bool {
         return self & (PointerError::_Dummy as u32) != 0;
     }
 }
 
 impl PointerErrorSet for i32 {
-    fn is_role(&self) -> bool {
+    fn has_role(&self) -> bool {
         return self & (PointerError::Role as i32) != 0;
     }
-    fn is_(&self) -> bool {
+    fn has_(&self) -> bool {
         return self & (PointerError::_Dummy as i32) != 0;
     }
 }
@@ -119,19 +119,19 @@ pub trait PointerButtonStateSet {
 }
 
 impl PointerButtonStateSet for u32 {
-    fn is_released(&self) -> bool {
+    fn has_released(&self) -> bool {
         return self & (PointerButtonState::Released as u32) != 0;
     }
-    fn is_pressed(&self) -> bool {
+    fn has_pressed(&self) -> bool {
         return self & (PointerButtonState::Pressed as u32) != 0;
     }
 }
 
 impl PointerButtonStateSet for i32 {
-    fn is_released(&self) -> bool {
+    fn has_released(&self) -> bool {
         return self & (PointerButtonState::Released as i32) != 0;
     }
-    fn is_pressed(&self) -> bool {
+    fn has_pressed(&self) -> bool {
         return self & (PointerButtonState::Pressed as i32) != 0;
     }
 }
@@ -165,19 +165,19 @@ pub trait PointerAxisSet {
 }
 
 impl PointerAxisSet for u32 {
-    fn is_vertical_scroll(&self) -> bool {
+    fn has_vertical_scroll(&self) -> bool {
         return self & (PointerAxis::VerticalScroll as u32) != 0;
     }
-    fn is_horizontal_scroll(&self) -> bool {
+    fn has_horizontal_scroll(&self) -> bool {
         return self & (PointerAxis::HorizontalScroll as u32) != 0;
     }
 }
 
 impl PointerAxisSet for i32 {
-    fn is_vertical_scroll(&self) -> bool {
+    fn has_vertical_scroll(&self) -> bool {
         return self & (PointerAxis::VerticalScroll as i32) != 0;
     }
-    fn is_horizontal_scroll(&self) -> bool {
+    fn has_horizontal_scroll(&self) -> bool {
         return self & (PointerAxis::HorizontalScroll as i32) != 0;
     }
 }

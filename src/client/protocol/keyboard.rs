@@ -73,19 +73,19 @@ pub trait KeyboardKeymapFormatSet {
 }
 
 impl KeyboardKeymapFormatSet for u32 {
-    fn is_no_keymap(&self) -> bool {
+    fn has_no_keymap(&self) -> bool {
         return self & (KeyboardKeymapFormat::NoKeymap as u32) != 0;
     }
-    fn is_xkb_v1(&self) -> bool {
+    fn has_xkb_v1(&self) -> bool {
         return self & (KeyboardKeymapFormat::XkbV1 as u32) != 0;
     }
 }
 
 impl KeyboardKeymapFormatSet for i32 {
-    fn is_no_keymap(&self) -> bool {
+    fn has_no_keymap(&self) -> bool {
         return self & (KeyboardKeymapFormat::NoKeymap as i32) != 0;
     }
-    fn is_xkb_v1(&self) -> bool {
+    fn has_xkb_v1(&self) -> bool {
         return self & (KeyboardKeymapFormat::XkbV1 as i32) != 0;
     }
 }
@@ -121,19 +121,19 @@ pub trait KeyboardKeyStateSet {
 }
 
 impl KeyboardKeyStateSet for u32 {
-    fn is_released(&self) -> bool {
+    fn has_released(&self) -> bool {
         return self & (KeyboardKeyState::Released as u32) != 0;
     }
-    fn is_pressed(&self) -> bool {
+    fn has_pressed(&self) -> bool {
         return self & (KeyboardKeyState::Pressed as u32) != 0;
     }
 }
 
 impl KeyboardKeyStateSet for i32 {
-    fn is_released(&self) -> bool {
+    fn has_released(&self) -> bool {
         return self & (KeyboardKeyState::Released as i32) != 0;
     }
-    fn is_pressed(&self) -> bool {
+    fn has_pressed(&self) -> bool {
         return self & (KeyboardKeyState::Pressed as i32) != 0;
     }
 }

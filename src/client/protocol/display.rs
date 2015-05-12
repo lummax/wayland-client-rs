@@ -77,25 +77,25 @@ pub trait DisplayErrorSet {
 }
 
 impl DisplayErrorSet for u32 {
-    fn is_invalid_object(&self) -> bool {
+    fn has_invalid_object(&self) -> bool {
         return self & (DisplayError::InvalidObject as u32) != 0;
     }
-    fn is_invalid_method(&self) -> bool {
+    fn has_invalid_method(&self) -> bool {
         return self & (DisplayError::InvalidMethod as u32) != 0;
     }
-    fn is_no_memory(&self) -> bool {
+    fn has_no_memory(&self) -> bool {
         return self & (DisplayError::NoMemory as u32) != 0;
     }
 }
 
 impl DisplayErrorSet for i32 {
-    fn is_invalid_object(&self) -> bool {
+    fn has_invalid_object(&self) -> bool {
         return self & (DisplayError::InvalidObject as i32) != 0;
     }
-    fn is_invalid_method(&self) -> bool {
+    fn has_invalid_method(&self) -> bool {
         return self & (DisplayError::InvalidMethod as i32) != 0;
     }
-    fn is_no_memory(&self) -> bool {
+    fn has_no_memory(&self) -> bool {
         return self & (DisplayError::NoMemory as i32) != 0;
     }
 }

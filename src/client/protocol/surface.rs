@@ -72,19 +72,19 @@ pub trait SurfaceErrorSet {
 }
 
 impl SurfaceErrorSet for u32 {
-    fn is_invalid_scale(&self) -> bool {
+    fn has_invalid_scale(&self) -> bool {
         return self & (SurfaceError::InvalidScale as u32) != 0;
     }
-    fn is_invalid_transform(&self) -> bool {
+    fn has_invalid_transform(&self) -> bool {
         return self & (SurfaceError::InvalidTransform as u32) != 0;
     }
 }
 
 impl SurfaceErrorSet for i32 {
-    fn is_invalid_scale(&self) -> bool {
+    fn has_invalid_scale(&self) -> bool {
         return self & (SurfaceError::InvalidScale as i32) != 0;
     }
-    fn is_invalid_transform(&self) -> bool {
+    fn has_invalid_transform(&self) -> bool {
         return self & (SurfaceError::InvalidTransform as i32) != 0;
     }
 }

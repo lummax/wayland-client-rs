@@ -77,25 +77,25 @@ pub trait SeatCapabilitySet {
 }
 
 impl SeatCapabilitySet for u32 {
-    fn is_pointer(&self) -> bool {
+    fn has_pointer(&self) -> bool {
         return self & (SeatCapability::Pointer as u32) != 0;
     }
-    fn is_keyboard(&self) -> bool {
+    fn has_keyboard(&self) -> bool {
         return self & (SeatCapability::Keyboard as u32) != 0;
     }
-    fn is_touch(&self) -> bool {
+    fn has_touch(&self) -> bool {
         return self & (SeatCapability::Touch as u32) != 0;
     }
 }
 
 impl SeatCapabilitySet for i32 {
-    fn is_pointer(&self) -> bool {
+    fn has_pointer(&self) -> bool {
         return self & (SeatCapability::Pointer as i32) != 0;
     }
-    fn is_keyboard(&self) -> bool {
+    fn has_keyboard(&self) -> bool {
         return self & (SeatCapability::Keyboard as i32) != 0;
     }
-    fn is_touch(&self) -> bool {
+    fn has_touch(&self) -> bool {
         return self & (SeatCapability::Touch as i32) != 0;
     }
 }

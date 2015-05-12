@@ -83,43 +83,43 @@ pub trait OutputSubpixelSet {
 }
 
 impl OutputSubpixelSet for u32 {
-    fn is_unknown(&self) -> bool {
+    fn has_unknown(&self) -> bool {
         return self & (OutputSubpixel::Unknown as u32) != 0;
     }
-    fn is_none(&self) -> bool {
+    fn has_none(&self) -> bool {
         return self & (OutputSubpixel::None as u32) != 0;
     }
-    fn is_horizontal_rgb(&self) -> bool {
+    fn has_horizontal_rgb(&self) -> bool {
         return self & (OutputSubpixel::HorizontalRgb as u32) != 0;
     }
-    fn is_horizontal_bgr(&self) -> bool {
+    fn has_horizontal_bgr(&self) -> bool {
         return self & (OutputSubpixel::HorizontalBgr as u32) != 0;
     }
-    fn is_vertical_rgb(&self) -> bool {
+    fn has_vertical_rgb(&self) -> bool {
         return self & (OutputSubpixel::VerticalRgb as u32) != 0;
     }
-    fn is_vertical_bgr(&self) -> bool {
+    fn has_vertical_bgr(&self) -> bool {
         return self & (OutputSubpixel::VerticalBgr as u32) != 0;
     }
 }
 
 impl OutputSubpixelSet for i32 {
-    fn is_unknown(&self) -> bool {
+    fn has_unknown(&self) -> bool {
         return self & (OutputSubpixel::Unknown as i32) != 0;
     }
-    fn is_none(&self) -> bool {
+    fn has_none(&self) -> bool {
         return self & (OutputSubpixel::None as i32) != 0;
     }
-    fn is_horizontal_rgb(&self) -> bool {
+    fn has_horizontal_rgb(&self) -> bool {
         return self & (OutputSubpixel::HorizontalRgb as i32) != 0;
     }
-    fn is_horizontal_bgr(&self) -> bool {
+    fn has_horizontal_bgr(&self) -> bool {
         return self & (OutputSubpixel::HorizontalBgr as i32) != 0;
     }
-    fn is_vertical_rgb(&self) -> bool {
+    fn has_vertical_rgb(&self) -> bool {
         return self & (OutputSubpixel::VerticalRgb as i32) != 0;
     }
-    fn is_vertical_bgr(&self) -> bool {
+    fn has_vertical_bgr(&self) -> bool {
         return self & (OutputSubpixel::VerticalBgr as i32) != 0;
     }
 }
@@ -181,55 +181,55 @@ pub trait OutputTransformSet {
 }
 
 impl OutputTransformSet for u32 {
-    fn is_normal(&self) -> bool {
+    fn has_normal(&self) -> bool {
         return self & (OutputTransform::Normal as u32) != 0;
     }
-    fn is_90(&self) -> bool {
+    fn has_90(&self) -> bool {
         return self & (OutputTransform::_90 as u32) != 0;
     }
-    fn is_180(&self) -> bool {
+    fn has_180(&self) -> bool {
         return self & (OutputTransform::_180 as u32) != 0;
     }
-    fn is_270(&self) -> bool {
+    fn has_270(&self) -> bool {
         return self & (OutputTransform::_270 as u32) != 0;
     }
-    fn is_flipped(&self) -> bool {
+    fn has_flipped(&self) -> bool {
         return self & (OutputTransform::Flipped as u32) != 0;
     }
-    fn is_flipped_90(&self) -> bool {
+    fn has_flipped_90(&self) -> bool {
         return self & (OutputTransform::Flipped90 as u32) != 0;
     }
-    fn is_flipped_180(&self) -> bool {
+    fn has_flipped_180(&self) -> bool {
         return self & (OutputTransform::Flipped180 as u32) != 0;
     }
-    fn is_flipped_270(&self) -> bool {
+    fn has_flipped_270(&self) -> bool {
         return self & (OutputTransform::Flipped270 as u32) != 0;
     }
 }
 
 impl OutputTransformSet for i32 {
-    fn is_normal(&self) -> bool {
+    fn has_normal(&self) -> bool {
         return self & (OutputTransform::Normal as i32) != 0;
     }
-    fn is_90(&self) -> bool {
+    fn has_90(&self) -> bool {
         return self & (OutputTransform::_90 as i32) != 0;
     }
-    fn is_180(&self) -> bool {
+    fn has_180(&self) -> bool {
         return self & (OutputTransform::_180 as i32) != 0;
     }
-    fn is_270(&self) -> bool {
+    fn has_270(&self) -> bool {
         return self & (OutputTransform::_270 as i32) != 0;
     }
-    fn is_flipped(&self) -> bool {
+    fn has_flipped(&self) -> bool {
         return self & (OutputTransform::Flipped as i32) != 0;
     }
-    fn is_flipped_90(&self) -> bool {
+    fn has_flipped_90(&self) -> bool {
         return self & (OutputTransform::Flipped90 as i32) != 0;
     }
-    fn is_flipped_180(&self) -> bool {
+    fn has_flipped_180(&self) -> bool {
         return self & (OutputTransform::Flipped180 as i32) != 0;
     }
-    fn is_flipped_270(&self) -> bool {
+    fn has_flipped_270(&self) -> bool {
         return self & (OutputTransform::Flipped270 as i32) != 0;
     }
 }
@@ -266,19 +266,19 @@ pub trait OutputModeSet {
 }
 
 impl OutputModeSet for u32 {
-    fn is_current(&self) -> bool {
+    fn has_current(&self) -> bool {
         return self & (OutputMode::Current as u32) != 0;
     }
-    fn is_preferred(&self) -> bool {
+    fn has_preferred(&self) -> bool {
         return self & (OutputMode::Preferred as u32) != 0;
     }
 }
 
 impl OutputModeSet for i32 {
-    fn is_current(&self) -> bool {
+    fn has_current(&self) -> bool {
         return self & (OutputMode::Current as i32) != 0;
     }
-    fn is_preferred(&self) -> bool {
+    fn has_preferred(&self) -> bool {
         return self & (OutputMode::Preferred as i32) != 0;
     }
 }

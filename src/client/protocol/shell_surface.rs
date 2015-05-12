@@ -94,61 +94,61 @@ pub trait ShellSurfaceResizeSet {
 }
 
 impl ShellSurfaceResizeSet for u32 {
-    fn is_none(&self) -> bool {
+    fn has_none(&self) -> bool {
         return self & (ShellSurfaceResize::None as u32) != 0;
     }
-    fn is_top(&self) -> bool {
+    fn has_top(&self) -> bool {
         return self & (ShellSurfaceResize::Top as u32) != 0;
     }
-    fn is_bottom(&self) -> bool {
+    fn has_bottom(&self) -> bool {
         return self & (ShellSurfaceResize::Bottom as u32) != 0;
     }
-    fn is_left(&self) -> bool {
+    fn has_left(&self) -> bool {
         return self & (ShellSurfaceResize::Left as u32) != 0;
     }
-    fn is_top_left(&self) -> bool {
+    fn has_top_left(&self) -> bool {
         return self & (ShellSurfaceResize::TopLeft as u32) != 0;
     }
-    fn is_bottom_left(&self) -> bool {
+    fn has_bottom_left(&self) -> bool {
         return self & (ShellSurfaceResize::BottomLeft as u32) != 0;
     }
-    fn is_right(&self) -> bool {
+    fn has_right(&self) -> bool {
         return self & (ShellSurfaceResize::Right as u32) != 0;
     }
-    fn is_top_right(&self) -> bool {
+    fn has_top_right(&self) -> bool {
         return self & (ShellSurfaceResize::TopRight as u32) != 0;
     }
-    fn is_bottom_right(&self) -> bool {
+    fn has_bottom_right(&self) -> bool {
         return self & (ShellSurfaceResize::BottomRight as u32) != 0;
     }
 }
 
 impl ShellSurfaceResizeSet for i32 {
-    fn is_none(&self) -> bool {
+    fn has_none(&self) -> bool {
         return self & (ShellSurfaceResize::None as i32) != 0;
     }
-    fn is_top(&self) -> bool {
+    fn has_top(&self) -> bool {
         return self & (ShellSurfaceResize::Top as i32) != 0;
     }
-    fn is_bottom(&self) -> bool {
+    fn has_bottom(&self) -> bool {
         return self & (ShellSurfaceResize::Bottom as i32) != 0;
     }
-    fn is_left(&self) -> bool {
+    fn has_left(&self) -> bool {
         return self & (ShellSurfaceResize::Left as i32) != 0;
     }
-    fn is_top_left(&self) -> bool {
+    fn has_top_left(&self) -> bool {
         return self & (ShellSurfaceResize::TopLeft as i32) != 0;
     }
-    fn is_bottom_left(&self) -> bool {
+    fn has_bottom_left(&self) -> bool {
         return self & (ShellSurfaceResize::BottomLeft as i32) != 0;
     }
-    fn is_right(&self) -> bool {
+    fn has_right(&self) -> bool {
         return self & (ShellSurfaceResize::Right as i32) != 0;
     }
-    fn is_top_right(&self) -> bool {
+    fn has_top_right(&self) -> bool {
         return self & (ShellSurfaceResize::TopRight as i32) != 0;
     }
-    fn is_bottom_right(&self) -> bool {
+    fn has_bottom_right(&self) -> bool {
         return self & (ShellSurfaceResize::BottomRight as i32) != 0;
     }
 }
@@ -184,19 +184,19 @@ pub trait ShellSurfaceTransientSet {
 }
 
 impl ShellSurfaceTransientSet for u32 {
-    fn is_inactive(&self) -> bool {
+    fn has_inactive(&self) -> bool {
         return self & (ShellSurfaceTransient::Inactive as u32) != 0;
     }
-    fn is_(&self) -> bool {
+    fn has_(&self) -> bool {
         return self & (ShellSurfaceTransient::_Dummy as u32) != 0;
     }
 }
 
 impl ShellSurfaceTransientSet for i32 {
-    fn is_inactive(&self) -> bool {
+    fn has_inactive(&self) -> bool {
         return self & (ShellSurfaceTransient::Inactive as i32) != 0;
     }
-    fn is_(&self) -> bool {
+    fn has_(&self) -> bool {
         return self & (ShellSurfaceTransient::_Dummy as i32) != 0;
     }
 }
@@ -242,31 +242,31 @@ pub trait ShellSurfaceFullscreenMethodSet {
 }
 
 impl ShellSurfaceFullscreenMethodSet for u32 {
-    fn is_default(&self) -> bool {
+    fn has_default(&self) -> bool {
         return self & (ShellSurfaceFullscreenMethod::Default as u32) != 0;
     }
-    fn is_scale(&self) -> bool {
+    fn has_scale(&self) -> bool {
         return self & (ShellSurfaceFullscreenMethod::Scale as u32) != 0;
     }
-    fn is_driver(&self) -> bool {
+    fn has_driver(&self) -> bool {
         return self & (ShellSurfaceFullscreenMethod::Driver as u32) != 0;
     }
-    fn is_fill(&self) -> bool {
+    fn has_fill(&self) -> bool {
         return self & (ShellSurfaceFullscreenMethod::Fill as u32) != 0;
     }
 }
 
 impl ShellSurfaceFullscreenMethodSet for i32 {
-    fn is_default(&self) -> bool {
+    fn has_default(&self) -> bool {
         return self & (ShellSurfaceFullscreenMethod::Default as i32) != 0;
     }
-    fn is_scale(&self) -> bool {
+    fn has_scale(&self) -> bool {
         return self & (ShellSurfaceFullscreenMethod::Scale as i32) != 0;
     }
-    fn is_driver(&self) -> bool {
+    fn has_driver(&self) -> bool {
         return self & (ShellSurfaceFullscreenMethod::Driver as i32) != 0;
     }
-    fn is_fill(&self) -> bool {
+    fn has_fill(&self) -> bool {
         return self & (ShellSurfaceFullscreenMethod::Fill as i32) != 0;
     }
 }

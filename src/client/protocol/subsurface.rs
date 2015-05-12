@@ -70,19 +70,19 @@ pub trait SubsurfaceErrorSet {
 }
 
 impl SubsurfaceErrorSet for u32 {
-    fn is_bad_surface(&self) -> bool {
+    fn has_bad_surface(&self) -> bool {
         return self & (SubsurfaceError::BadSurface as u32) != 0;
     }
-    fn is_(&self) -> bool {
+    fn has_(&self) -> bool {
         return self & (SubsurfaceError::_Dummy as u32) != 0;
     }
 }
 
 impl SubsurfaceErrorSet for i32 {
-    fn is_bad_surface(&self) -> bool {
+    fn has_bad_surface(&self) -> bool {
         return self & (SubsurfaceError::BadSurface as i32) != 0;
     }
-    fn is_(&self) -> bool {
+    fn has_(&self) -> bool {
         return self & (SubsurfaceError::_Dummy as i32) != 0;
     }
 }

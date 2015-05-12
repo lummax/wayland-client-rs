@@ -70,19 +70,19 @@ pub trait ShellErrorSet {
 }
 
 impl ShellErrorSet for u32 {
-    fn is_role(&self) -> bool {
+    fn has_role(&self) -> bool {
         return self & (ShellError::Role as u32) != 0;
     }
-    fn is_(&self) -> bool {
+    fn has_(&self) -> bool {
         return self & (ShellError::_Dummy as u32) != 0;
     }
 }
 
 impl ShellErrorSet for i32 {
-    fn is_role(&self) -> bool {
+    fn has_role(&self) -> bool {
         return self & (ShellError::Role as i32) != 0;
     }
-    fn is_(&self) -> bool {
+    fn has_(&self) -> bool {
         return self & (ShellError::_Dummy as i32) != 0;
     }
 }

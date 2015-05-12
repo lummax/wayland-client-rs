@@ -70,19 +70,19 @@ pub trait DataDeviceErrorSet {
 }
 
 impl DataDeviceErrorSet for u32 {
-    fn is_role(&self) -> bool {
+    fn has_role(&self) -> bool {
         return self & (DataDeviceError::Role as u32) != 0;
     }
-    fn is_(&self) -> bool {
+    fn has_(&self) -> bool {
         return self & (DataDeviceError::_Dummy as u32) != 0;
     }
 }
 
 impl DataDeviceErrorSet for i32 {
-    fn is_role(&self) -> bool {
+    fn has_role(&self) -> bool {
         return self & (DataDeviceError::Role as i32) != 0;
     }
-    fn is_(&self) -> bool {
+    fn has_(&self) -> bool {
         return self & (DataDeviceError::_Dummy as i32) != 0;
     }
 }
