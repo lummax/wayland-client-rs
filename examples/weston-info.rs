@@ -7,7 +7,8 @@ use wayland_client::client::{FromPrimitive, Display,
                              Seat, SeatEventHandler, SeatCapability,
                              Shm, ShmEventHandler, ShmFormat,
                              Output, OutputEventHandler, OutputSubpixel,
-                             OutputTransform, OutputMode};
+                             OutputTransform, OutputMode,
+                             Keyboard, KeyboardEventHandler};
 
 use std::collections::HashMap;
 
@@ -43,16 +44,24 @@ struct OutputModeData {
     flags: String,
 }
 
+#[derive(Default)]
+struct KeyboardData {
+    rate: i32,
+    delay: i32,
+}
+
 struct Info {
     registry: Registry,
     seat: Option<Seat>,
     shm: Option<Shm>,
     output: Option<Output>,
+    keyboard: Option<Keyboard>,
     pub roundtrip: bool,
     data: HashMap<String, String>,
     seat_data: SeatData,
     shm_data: ShmData,
     output_data: OutputData,
+    keyboard_data: KeyboardData,
 }
 
 impl Info {
@@ -62,11 +71,13 @@ impl Info {
             seat: None,
             shm: None,
             output: None,
+            keyboard: None,
             roundtrip: true,
             data: HashMap::new(),
             seat_data: Default::default(),
             shm_data: Default::default(),
             output_data: Default::default(),
+            keyboard_data: Default::default(),
         };
     }
 
@@ -82,6 +93,8 @@ impl Info {
                     println!("\tname: {}", self.seat_data.name);
                     println!("\tcapabilities: {}",
                              self.seat_data.capabilities.connect(" "));
+                    println!("\tkeyboard repeat rate: {}", self.keyboard_data.rate);
+                    println!("\tkeyboard repeat delay: {}", self.keyboard_data.delay);
                 },
                 "wl_output" => {
                     println!("\tx: {}, y: {},", self.output_data.x,
@@ -144,6 +157,9 @@ impl SeatEventHandler for Info {
         }
         if capabilities & (SeatCapability::KEYBOARD as u32) != 0 {
             self.seat_data.capabilities.push("keyboard".to_string());
+            self.keyboard = self.get_seat().get_keyboard().ok();
+            KeyboardEventHandler::connect_dispatcher(self);
+            self.roundtrip = true;
         }
         if capabilities & (SeatCapability::TOUCH as u32) != 0 {
             self.seat_data.capabilities.push("touch".to_string());
@@ -197,6 +213,17 @@ impl OutputEventHandler for Info {
             refresh: refresh,
             flags: flags_.connect(" "),
         })
+    }
+}
+
+impl KeyboardEventHandler for Info {
+    fn get_keyboard(&mut self) -> &mut Keyboard {
+        return self.keyboard.as_mut().unwrap();
+    }
+
+    fn on_repeat_info(&mut self, rate: i32, delay: i32) {
+        self.keyboard_data.rate = rate;
+        self.keyboard_data.delay = delay;
     }
 }
 
