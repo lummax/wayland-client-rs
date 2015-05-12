@@ -48,19 +48,19 @@ extern {
 #[derive(Debug)]
 pub enum DisplayError {
     /// server couldn't find object
-    InvalidObject = 0,
+    INVALIDOBJECT = 0,
     /// method doesn't exist on the specified interface
-    InvalidMethod = 1,
+    INVALIDMETHOD = 1,
     /// server is out of memory
-    NoMemory = 2,
+    NOMEMORY = 2,
 }
 
 impl FromPrimitive for DisplayError {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(DisplayError::InvalidObject),
-            1 => Some(DisplayError::InvalidMethod),
-            2 => Some(DisplayError::NoMemory),
+            0 => Some(DisplayError::INVALIDOBJECT),
+            1 => Some(DisplayError::INVALIDMETHOD),
+            2 => Some(DisplayError::NOMEMORY),
             _ => None
         }
     }

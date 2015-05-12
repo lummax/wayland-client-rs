@@ -46,7 +46,7 @@ extern {
 #[derive(Debug)]
 pub enum SubcompositorError {
     /// the to-be sub-surface is invalid
-    BadSurface = 0,
+    BADSURFACE = 0,
     
     _Dummy,
 }
@@ -54,7 +54,7 @@ pub enum SubcompositorError {
 impl FromPrimitive for SubcompositorError {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(SubcompositorError::BadSurface),
+            0 => Some(SubcompositorError::BADSURFACE),
             _ => None
         }
     }

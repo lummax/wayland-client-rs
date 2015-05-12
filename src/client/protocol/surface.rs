@@ -47,16 +47,16 @@ extern {
 #[derive(Debug)]
 pub enum SurfaceError {
     /// buffer scale value is invalid
-    InvalidScale = 0,
+    INVALIDSCALE = 0,
     /// buffer transform value is invalid
-    InvalidTransform = 1,
+    INVALIDTRANSFORM = 1,
 }
 
 impl FromPrimitive for SurfaceError {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(SurfaceError::InvalidScale),
-            1 => Some(SurfaceError::InvalidTransform),
+            0 => Some(SurfaceError::INVALIDSCALE),
+            1 => Some(SurfaceError::INVALIDTRANSFORM),
             _ => None
         }
     }

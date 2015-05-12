@@ -46,7 +46,7 @@ extern {
 #[derive(Debug)]
 pub enum DataDeviceError {
     /// given wl_surface has another role
-    Role = 0,
+    ROLE = 0,
     
     _Dummy,
 }
@@ -54,7 +54,7 @@ pub enum DataDeviceError {
 impl FromPrimitive for DataDeviceError {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(DataDeviceError::Role),
+            0 => Some(DataDeviceError::ROLE),
             _ => None
         }
     }

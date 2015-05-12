@@ -48,19 +48,19 @@ extern {
 #[derive(Debug)]
 pub enum SeatCapability {
     /// The seat has pointer devices
-    Pointer = 1,
+    POINTER = 1,
     /// The seat has one or more keyboards
-    Keyboard = 2,
+    KEYBOARD = 2,
     /// The seat has touch devices
-    Touch = 4,
+    TOUCH = 4,
 }
 
 impl FromPrimitive for SeatCapability {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            1 => Some(SeatCapability::Pointer),
-            2 => Some(SeatCapability::Keyboard),
-            4 => Some(SeatCapability::Touch),
+            1 => Some(SeatCapability::POINTER),
+            2 => Some(SeatCapability::KEYBOARD),
+            4 => Some(SeatCapability::TOUCH),
             _ => None
         }
     }

@@ -46,7 +46,7 @@ extern {
 #[derive(Debug)]
 pub enum ShellError {
     /// given wl_surface has another role
-    Role = 0,
+    ROLE = 0,
     
     _Dummy,
 }
@@ -54,7 +54,7 @@ pub enum ShellError {
 impl FromPrimitive for ShellError {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(ShellError::Role),
+            0 => Some(ShellError::ROLE),
             _ => None
         }
     }

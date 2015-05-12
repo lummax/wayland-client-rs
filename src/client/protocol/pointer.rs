@@ -46,7 +46,7 @@ extern {
 #[derive(Debug)]
 pub enum PointerError {
     /// given wl_surface has another role
-    Role = 0,
+    ROLE = 0,
     
     _Dummy,
 }
@@ -54,7 +54,7 @@ pub enum PointerError {
 impl FromPrimitive for PointerError {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(PointerError::Role),
+            0 => Some(PointerError::ROLE),
             _ => None
         }
     }
@@ -66,16 +66,16 @@ impl FromPrimitive for PointerError {
 #[derive(Debug)]
 pub enum PointerButtonState {
     /// The button is not pressed
-    Released = 0,
+    RELEASED = 0,
     /// The button is pressed
-    Pressed = 1,
+    PRESSED = 1,
 }
 
 impl FromPrimitive for PointerButtonState {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(PointerButtonState::Released),
-            1 => Some(PointerButtonState::Pressed),
+            0 => Some(PointerButtonState::RELEASED),
+            1 => Some(PointerButtonState::PRESSED),
             _ => None
         }
     }
@@ -85,15 +85,15 @@ impl FromPrimitive for PointerButtonState {
 #[repr(C)]
 #[derive(Debug)]
 pub enum PointerAxis {
-    VerticalScroll = 0,
-    HorizontalScroll = 1,
+    VERTICALSCROLL = 0,
+    HORIZONTALSCROLL = 1,
 }
 
 impl FromPrimitive for PointerAxis {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(PointerAxis::VerticalScroll),
-            1 => Some(PointerAxis::HorizontalScroll),
+            0 => Some(PointerAxis::VERTICALSCROLL),
+            1 => Some(PointerAxis::HORIZONTALSCROLL),
             _ => None
         }
     }

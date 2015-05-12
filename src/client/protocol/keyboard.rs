@@ -48,16 +48,16 @@ extern {
 #[derive(Debug)]
 pub enum KeyboardKeymapFormat {
     /// no keymap; client must understand how to interpret the raw keycode
-    NoKeymap = 0,
+    NOKEYMAP = 0,
     /// libxkbcommon compatible; to determine the xkb keycode, clients must add 8 to the key event keycode
-    XkbV1 = 1,
+    XKBV1 = 1,
 }
 
 impl FromPrimitive for KeyboardKeymapFormat {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(KeyboardKeymapFormat::NoKeymap),
-            1 => Some(KeyboardKeymapFormat::XkbV1),
+            0 => Some(KeyboardKeymapFormat::NOKEYMAP),
+            1 => Some(KeyboardKeymapFormat::XKBV1),
             _ => None
         }
     }
@@ -68,16 +68,16 @@ impl FromPrimitive for KeyboardKeymapFormat {
 #[derive(Debug)]
 pub enum KeyboardKeyState {
     /// key is not pressed
-    Released = 0,
+    RELEASED = 0,
     /// key is pressed
-    Pressed = 1,
+    PRESSED = 1,
 }
 
 impl FromPrimitive for KeyboardKeyState {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(KeyboardKeyState::Released),
-            1 => Some(KeyboardKeyState::Pressed),
+            0 => Some(KeyboardKeyState::RELEASED),
+            1 => Some(KeyboardKeyState::PRESSED),
             _ => None
         }
     }

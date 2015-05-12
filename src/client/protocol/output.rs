@@ -47,23 +47,23 @@ extern {
 #[repr(C)]
 #[derive(Debug)]
 pub enum OutputSubpixel {
-    Unknown = 0,
-    None = 1,
-    HorizontalRgb = 2,
-    HorizontalBgr = 3,
-    VerticalRgb = 4,
-    VerticalBgr = 5,
+    UNKNOWN = 0,
+    NONE = 1,
+    HORIZONTALRGB = 2,
+    HORIZONTALBGR = 3,
+    VERTICALRGB = 4,
+    VERTICALBGR = 5,
 }
 
 impl FromPrimitive for OutputSubpixel {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(OutputSubpixel::Unknown),
-            1 => Some(OutputSubpixel::None),
-            2 => Some(OutputSubpixel::HorizontalRgb),
-            3 => Some(OutputSubpixel::HorizontalBgr),
-            4 => Some(OutputSubpixel::VerticalRgb),
-            5 => Some(OutputSubpixel::VerticalBgr),
+            0 => Some(OutputSubpixel::UNKNOWN),
+            1 => Some(OutputSubpixel::NONE),
+            2 => Some(OutputSubpixel::HORIZONTALRGB),
+            3 => Some(OutputSubpixel::HORIZONTALBGR),
+            4 => Some(OutputSubpixel::VERTICALRGB),
+            5 => Some(OutputSubpixel::VERTICALBGR),
             _ => None
         }
     }
@@ -83,27 +83,27 @@ impl FromPrimitive for OutputSubpixel {
 #[repr(C)]
 #[derive(Debug)]
 pub enum OutputTransform {
-    Normal = 0,
+    NORMAL = 0,
     _90 = 1,
     _180 = 2,
     _270 = 3,
-    Flipped = 4,
-    Flipped90 = 5,
-    Flipped180 = 6,
-    Flipped270 = 7,
+    FLIPPED = 4,
+    FLIPPED90 = 5,
+    FLIPPED180 = 6,
+    FLIPPED270 = 7,
 }
 
 impl FromPrimitive for OutputTransform {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(OutputTransform::Normal),
+            0 => Some(OutputTransform::NORMAL),
             1 => Some(OutputTransform::_90),
             2 => Some(OutputTransform::_180),
             3 => Some(OutputTransform::_270),
-            4 => Some(OutputTransform::Flipped),
-            5 => Some(OutputTransform::Flipped90),
-            6 => Some(OutputTransform::Flipped180),
-            7 => Some(OutputTransform::Flipped270),
+            4 => Some(OutputTransform::FLIPPED),
+            5 => Some(OutputTransform::FLIPPED90),
+            6 => Some(OutputTransform::FLIPPED180),
+            7 => Some(OutputTransform::FLIPPED270),
             _ => None
         }
     }
@@ -115,16 +115,16 @@ impl FromPrimitive for OutputTransform {
 #[derive(Debug)]
 pub enum OutputMode {
     /// indicates this is the current mode
-    Current = 0x1,
+    CURRENT = 0x1,
     /// indicates this is the preferred mode
-    Preferred = 0x2,
+    PREFERRED = 0x2,
 }
 
 impl FromPrimitive for OutputMode {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0x1 => Some(OutputMode::Current),
-            0x2 => Some(OutputMode::Preferred),
+            0x1 => Some(OutputMode::CURRENT),
+            0x2 => Some(OutputMode::PREFERRED),
             _ => None
         }
     }

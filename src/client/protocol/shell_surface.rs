@@ -49,29 +49,29 @@ extern {
 #[repr(C)]
 #[derive(Debug)]
 pub enum ShellSurfaceResize {
-    None = 0,
-    Top = 1,
-    Bottom = 2,
-    Left = 4,
-    TopLeft = 5,
-    BottomLeft = 6,
-    Right = 8,
-    TopRight = 9,
-    BottomRight = 10,
+    NONE = 0,
+    TOP = 1,
+    BOTTOM = 2,
+    LEFT = 4,
+    TOPLEFT = 5,
+    BOTTOMLEFT = 6,
+    RIGHT = 8,
+    TOPRIGHT = 9,
+    BOTTOMRIGHT = 10,
 }
 
 impl FromPrimitive for ShellSurfaceResize {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(ShellSurfaceResize::None),
-            1 => Some(ShellSurfaceResize::Top),
-            2 => Some(ShellSurfaceResize::Bottom),
-            4 => Some(ShellSurfaceResize::Left),
-            5 => Some(ShellSurfaceResize::TopLeft),
-            6 => Some(ShellSurfaceResize::BottomLeft),
-            8 => Some(ShellSurfaceResize::Right),
-            9 => Some(ShellSurfaceResize::TopRight),
-            10 => Some(ShellSurfaceResize::BottomRight),
+            0 => Some(ShellSurfaceResize::NONE),
+            1 => Some(ShellSurfaceResize::TOP),
+            2 => Some(ShellSurfaceResize::BOTTOM),
+            4 => Some(ShellSurfaceResize::LEFT),
+            5 => Some(ShellSurfaceResize::TOPLEFT),
+            6 => Some(ShellSurfaceResize::BOTTOMLEFT),
+            8 => Some(ShellSurfaceResize::RIGHT),
+            9 => Some(ShellSurfaceResize::TOPRIGHT),
+            10 => Some(ShellSurfaceResize::BOTTOMRIGHT),
             _ => None
         }
     }
@@ -83,7 +83,7 @@ impl FromPrimitive for ShellSurfaceResize {
 #[derive(Debug)]
 pub enum ShellSurfaceTransient {
     /// do not set keyboard focus
-    Inactive = 0x1,
+    INACTIVE = 0x1,
     
     _Dummy,
 }
@@ -91,7 +91,7 @@ pub enum ShellSurfaceTransient {
 impl FromPrimitive for ShellSurfaceTransient {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0x1 => Some(ShellSurfaceTransient::Inactive),
+            0x1 => Some(ShellSurfaceTransient::INACTIVE),
             _ => None
         }
     }
@@ -104,22 +104,22 @@ impl FromPrimitive for ShellSurfaceTransient {
 #[derive(Debug)]
 pub enum ShellSurfaceFullscreenMethod {
     /// no preference, apply default policy
-    Default = 0,
+    DEFAULT = 0,
     /// scale, preserve the surface's aspect ratio and center on output
-    Scale = 1,
+    SCALE = 1,
     /// switch output mode to the smallest mode that can fit the surface, add black borders to compensate size mismatch
-    Driver = 2,
+    DRIVER = 2,
     /// no upscaling, center on output and add black borders to compensate size mismatch
-    Fill = 3,
+    FILL = 3,
 }
 
 impl FromPrimitive for ShellSurfaceFullscreenMethod {
     fn from_u32(num: u32) -> Option<Self> {
         return match num {
-            0 => Some(ShellSurfaceFullscreenMethod::Default),
-            1 => Some(ShellSurfaceFullscreenMethod::Scale),
-            2 => Some(ShellSurfaceFullscreenMethod::Driver),
-            3 => Some(ShellSurfaceFullscreenMethod::Fill),
+            0 => Some(ShellSurfaceFullscreenMethod::DEFAULT),
+            1 => Some(ShellSurfaceFullscreenMethod::SCALE),
+            2 => Some(ShellSurfaceFullscreenMethod::DRIVER),
+            3 => Some(ShellSurfaceFullscreenMethod::FILL),
             _ => None
         }
     }
