@@ -55,6 +55,10 @@ impl FromPrimitive for BufferEvent {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 #[repr(C)]
@@ -69,6 +73,10 @@ impl FromPrimitive for BufferRequest {
             0 => Some(BufferRequest::Destroy),
             _ => None
         }
+    }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
     }
 }
 

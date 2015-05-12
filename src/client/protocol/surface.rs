@@ -60,6 +60,10 @@ impl FromPrimitive for SurfaceError {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 #[repr(C)]
@@ -75,6 +79,10 @@ impl FromPrimitive for SurfaceEvent {
             1 => Some(SurfaceEvent::Leave),
             _ => None
         }
+    }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
     }
 }
 
@@ -105,6 +113,10 @@ impl FromPrimitive for SurfaceRequest {
             8 => Some(SurfaceRequest::SetBufferScale),
             _ => None
         }
+    }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
     }
 }
 

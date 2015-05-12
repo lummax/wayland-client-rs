@@ -59,6 +59,10 @@ impl FromPrimitive for ShmPoolRequest {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 /// The wl_shm_pool object encapsulates a piece of memory shared

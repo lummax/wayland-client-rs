@@ -55,6 +55,10 @@ impl FromPrimitive for CallbackEvent {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 

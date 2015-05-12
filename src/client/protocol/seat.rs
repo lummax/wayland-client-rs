@@ -64,6 +64,10 @@ impl FromPrimitive for SeatCapability {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 #[repr(C)]
@@ -79,6 +83,10 @@ impl FromPrimitive for SeatEvent {
             1 => Some(SeatEvent::Name),
             _ => None
         }
+    }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
     }
 }
 
@@ -97,6 +105,10 @@ impl FromPrimitive for SeatRequest {
             2 => Some(SeatRequest::GetTouch),
             _ => None
         }
+    }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
     }
 }
 

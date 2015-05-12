@@ -57,6 +57,10 @@ impl FromPrimitive for CompositorRequest {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 /// A compositor.  This object is a singleton global.  The

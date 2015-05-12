@@ -61,6 +61,10 @@ impl FromPrimitive for KeyboardKeymapFormat {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 /// Describes the physical state of a key which provoked the key event.
@@ -80,6 +84,10 @@ impl FromPrimitive for KeyboardKeyState {
             1 => Some(KeyboardKeyState::PRESSED),
             _ => None
         }
+    }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
     }
 }
 
@@ -105,6 +113,10 @@ impl FromPrimitive for KeyboardEvent {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 #[repr(C)]
@@ -119,6 +131,10 @@ impl FromPrimitive for KeyboardRequest {
             0 => Some(KeyboardRequest::Release),
             _ => None
         }
+    }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
     }
 }
 

@@ -63,6 +63,10 @@ impl FromPrimitive for ShmError {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 /// This describes the memory layout of an individual pixel.
@@ -199,6 +203,10 @@ impl FromPrimitive for ShmFormat {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 #[repr(C)]
@@ -214,6 +222,10 @@ impl FromPrimitive for ShmEvent {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 #[repr(C)]
@@ -228,6 +240,10 @@ impl FromPrimitive for ShmRequest {
             0 => Some(ShmRequest::CreatePool),
             _ => None
         }
+    }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
     }
 }
 

@@ -75,6 +75,10 @@ impl FromPrimitive for ShellSurfaceResize {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 /// These flags specify details of the expected behaviour
@@ -94,6 +98,10 @@ impl FromPrimitive for ShellSurfaceTransient {
             0x1 => Some(ShellSurfaceTransient::INACTIVE),
             _ => None
         }
+    }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
     }
 }
 
@@ -123,6 +131,10 @@ impl FromPrimitive for ShellSurfaceFullscreenMethod {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 #[repr(C)]
@@ -140,6 +152,10 @@ impl FromPrimitive for ShellSurfaceEvent {
             2 => Some(ShellSurfaceEvent::PopupDone),
             _ => None
         }
+    }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
     }
 }
 
@@ -172,6 +188,10 @@ impl FromPrimitive for ShellSurfaceRequest {
             9 => Some(ShellSurfaceRequest::SetClass),
             _ => None
         }
+    }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
     }
 }
 

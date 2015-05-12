@@ -67,6 +67,10 @@ impl FromPrimitive for OutputSubpixel {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 /// This describes the transform that a compositor will apply to a
@@ -107,6 +111,10 @@ impl FromPrimitive for OutputTransform {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 /// These flags describe properties of an output mode.
@@ -128,6 +136,10 @@ impl FromPrimitive for OutputMode {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 #[repr(C)]
@@ -147,6 +159,10 @@ impl FromPrimitive for OutputEvent {
             3 => Some(OutputEvent::Scale),
             _ => None
         }
+    }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
     }
 }
 

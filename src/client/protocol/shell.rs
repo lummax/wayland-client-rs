@@ -58,6 +58,10 @@ impl FromPrimitive for ShellError {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 
@@ -73,6 +77,10 @@ impl FromPrimitive for ShellRequest {
             0 => Some(ShellRequest::GetShellSurface),
             _ => None
         }
+    }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
     }
 }
 

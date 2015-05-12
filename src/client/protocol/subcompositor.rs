@@ -58,6 +58,10 @@ impl FromPrimitive for SubcompositorError {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 
@@ -74,6 +78,10 @@ impl FromPrimitive for SubcompositorRequest {
             1 => Some(SubcompositorRequest::GetSubsurface),
             _ => None
         }
+    }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
     }
 }
 

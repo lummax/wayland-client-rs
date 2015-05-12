@@ -57,6 +57,10 @@ impl FromPrimitive for DataDeviceManagerRequest {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 /// The wl_data_device_manager is a singleton global object that

@@ -58,6 +58,10 @@ impl FromPrimitive for PointerError {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 /// Describes the physical state of a button which provoked the button
@@ -79,6 +83,10 @@ impl FromPrimitive for PointerButtonState {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 /// Describes the axis types of scroll events.
@@ -96,6 +104,10 @@ impl FromPrimitive for PointerAxis {
             1 => Some(PointerAxis::HORIZONTALSCROLL),
             _ => None
         }
+    }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
     }
 }
 
@@ -119,6 +131,10 @@ impl FromPrimitive for PointerEvent {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 #[repr(C)]
@@ -134,6 +150,10 @@ impl FromPrimitive for PointerRequest {
             1 => Some(PointerRequest::Release),
             _ => None
         }
+    }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
     }
 }
 

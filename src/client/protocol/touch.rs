@@ -62,6 +62,10 @@ impl FromPrimitive for TouchEvent {
             _ => None
         }
     }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
+    }
 }
 
 #[repr(C)]
@@ -76,6 +80,10 @@ impl FromPrimitive for TouchRequest {
             0 => Some(TouchRequest::Release),
             _ => None
         }
+    }
+
+    fn from_i32(num: i32) -> Option<Self> {
+        return Self::from_u32(num as u32);
     }
 }
 
