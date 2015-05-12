@@ -7,7 +7,7 @@ use wayland_client::client::{FromPrimitive, Display,
                              Seat, SeatEventHandler, SeatCapabilitySet,
                              Shm, ShmEventHandler, ShmFormat,
                              Output, OutputEventHandler, OutputSubpixel,
-                             OutputTransform, OutputMode,
+                             OutputTransform, OutputModeSet,
                              Keyboard, KeyboardEventHandler};
 
 use std::collections::HashMap;
@@ -201,10 +201,10 @@ impl OutputEventHandler for Info {
 
     fn on_mode(&mut self, flags: u32, width: i32, height: i32, refresh: i32) {
         let mut flags_ = Vec::new();
-        if flags & (OutputMode::CURRENT as u32) != 0 {
+        if flags.has_current() {
             flags_.push("current".to_string());
         }
-        if flags & (OutputMode::PREFERRED as u32) != 0 {
+        if flags.has_preferred() {
             flags_.push("preferred".to_string());
         }
         self.output_data.modes.push(OutputModeData {
