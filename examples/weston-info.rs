@@ -177,10 +177,10 @@ impl OutputEventHandler for Info {
         self.output_data.y = y;
         self.output_data.physical_width = physical_width;
         self.output_data.physical_height = physical_height;
-        self.output_data.subpixel = format!("{:?}", OutputSubpixel::from_u32(subpixel as u32).unwrap());
+        self.output_data.subpixel = format!("{:?}", OutputSubpixel::from_i32(subpixel).unwrap());
         self.output_data.make = make;
         self.output_data.model = model;
-        self.output_data.transform = format!("{:?}", OutputTransform::from_u32(transform as u32).unwrap());
+        self.output_data.transform = format!("{:?}", OutputTransform::from_i32(transform).unwrap());
     }
 
     fn on_mode(&mut self, flags: u32, width: i32, height: i32, refresh: i32) {
